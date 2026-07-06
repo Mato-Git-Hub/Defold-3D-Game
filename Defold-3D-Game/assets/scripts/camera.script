@@ -1,0 +1,38 @@
+-- Requiring modules
+local tween = require "assets.modules.tween"
+
+-- Defining properites
+go.property("camera_angle", -60)
+go.property("track_distance", 15)
+go.property("rotation_speed", 90)
+
+function init(self)
+	-- Defining constants
+	self.camera_angle = math.rad(self.camera_angle)
+	self.xz_distance = self.track_distance * math.cos(self.camera_angle)
+	self.y_distance = -self.track_distance * math.sin(self.camera_angle)
+
+	self.rotation_speed = math.rad(self.rotation_speed)
+
+	-- Defining state variables
+	self.angle_y = 0
+end
+
+function update(self, dt)
+	-- Getting info of the ball
+	local ball_pos = go.get_position("/ball")
+	local ball_velocity = go.get("/ball#collisionobject", "linear_velocity")
+
+	-- Calculating the target rotation for y-axis
+	local target_angle_y = math.atan2(ball_velocity.x, ball_velocity.z) + math.pi
+
+	-- Calculating the actual angle
+	self.angle_y = tween.move_towards_angle(self.angle_y, target_angle_y, self.rotation_speed * dt)
+	local rotation = vmath.quat_rotation_y(self.angle_y) * vmath.quat_rotation_x(self.camera_angle)
+	go.set_rotation(rotation, ".")
+
+	-- Calculating new location of the camera
+	local position = ball_pos + vmath.vector3(self.xz_distance * math.sin(self.angle_y), self.y_distance, self.xz_distance * math.cos(self.angle_y))
+	go.set_position(position, ".")
+	
+end
