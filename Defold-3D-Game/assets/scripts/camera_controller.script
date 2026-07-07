@@ -2,9 +2,9 @@
 local tween = require "assets.modules.tween"
 
 -- Defining properites
-go.property("camera_angle", -50)
-go.property("track_distance", 15)
-go.property("rotation_speed", 180)
+go.property("camera_angle", -40)
+go.property("track_distance", 20)
+go.property("rotation_speed", 120)
 go.property("update_velocity_treshold", 1.5)
 
 go.property("angle_y", 0)

@@ -2,8 +2,8 @@
 local tween = require "assets.modules.tween"
 
 -- Defining properties
-go.property("acceleration", 10)
-go.property("max_velocity", 50)
+go.property("acceleration", 7.5)
+go.property("max_velocity", 75)
 
 -- Function to update target velocity direction
 local function update_target_velocity_direction(self)
@@ -52,9 +52,6 @@ function init(self)
 end
 
 function fixed_update(self, dt)
-	-- Waking up the ball to avoid the movement from locking
-	physics.wakeup("#collisionobject")
-	
 	-- Updating target velocity direction
 	update_target_velocity_direction(self)
 
@@ -63,6 +60,9 @@ function fixed_update(self, dt)
 		self.velocity = vmath.length(go.get("#collisionobject", "angular_velocity"))
 		return
 	end
+
+	-- Waking up the ball to avoid the movement from locking
+	physics.wakeup("#collisionobject")
 
 	-- Calculating velocity
 	self.velocity = tween.move_towards(self.velocity, self.max_velocity, self.acceleration * dt)
