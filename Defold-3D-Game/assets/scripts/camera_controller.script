@@ -2,9 +2,12 @@
 local tween = require "assets.modules.tween"
 
 -- Defining properites
-go.property("camera_angle", -60)
+go.property("camera_angle", -50)
 go.property("track_distance", 15)
-go.property("rotation_speed", 90)
+go.property("rotation_speed", 180)
+go.property("update_velocity_treshold", 1.5)
+
+go.property("angle_y", 0)
 
 function init(self)
 	-- Defining constants
@@ -16,6 +19,7 @@ function init(self)
 
 	-- Defining state variables
 	self.angle_y = 0
+	self.target_angle_y = 0
 end
 
 function update(self, dt)
@@ -24,15 +28,17 @@ function update(self, dt)
 	local ball_velocity = go.get("/ball#collisionobject", "linear_velocity")
 
 	-- Calculating the target rotation for y-axis
-	local target_angle_y = math.atan2(ball_velocity.x, ball_velocity.z) + math.pi
+	local xz_linear_velocity = math.sqrt(ball_velocity.x * ball_velocity.x + ball_velocity.z * ball_velocity.z)
+	if (ball_velocity.x ~= 0 or ball_velocity.z ~= 0) and xz_linear_velocity > self.update_velocity_treshold then
+		self.target_angle_y = math.atan2(ball_velocity.x, ball_velocity.z) + math.pi
+	end
 
 	-- Calculating the actual angle
-	self.angle_y = tween.move_towards_angle(self.angle_y, target_angle_y, self.rotation_speed * dt)
+	self.angle_y = tween.move_towards_angle(self.angle_y, self.target_angle_y, self.rotation_speed * dt)
 	local rotation = vmath.quat_rotation_y(self.angle_y) * vmath.quat_rotation_x(self.camera_angle)
 	go.set_rotation(rotation, ".")
 
 	-- Calculating new location of the camera
 	local position = ball_pos + vmath.vector3(self.xz_distance * math.sin(self.angle_y), self.y_distance, self.xz_distance * math.cos(self.angle_y))
 	go.set_position(position, ".")
-	
 end

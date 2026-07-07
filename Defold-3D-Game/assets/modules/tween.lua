@@ -17,4 +17,21 @@ function M.move_towards_angle(angle, target, difference)
 	return angle
 end
 
+-- Function to move a value towards given target
+function M.move_towards(value, target, difference)
+	-- Calulcating the distance between the values
+	local distance = target - value
+
+	-- Checking if the value is already close enough
+	if math.abs(distance) < difference then
+		return target
+	end
+
+	-- Updating the value
+	value = value + difference * math.abs(distance) / distance
+
+	-- Returning the result
+	return value
+end
+
 return M

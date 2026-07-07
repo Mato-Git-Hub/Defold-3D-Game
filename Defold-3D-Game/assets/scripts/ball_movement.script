@@ -1,0 +1,100 @@
+-- Requiring modules
+local tween = require "assets.modules.tween"
+
+-- Defining properties
+go.property("acceleration", 10)
+go.property("max_velocity", 50)
+
+-- Function to update target velocity direction
+local function update_target_velocity_direction(self)
+	-- Setting base direction
+	local direction = vmath.vector3(0, 0, 0)
+
+	-- Updating direction based on inputs
+	if self.inputs.up then
+		direction.x = -1
+	elseif self.inputs.down then
+		direction.x = 1
+	end
+
+	if self.inputs.right then
+		direction.z = -1
+	elseif self.inputs.left then
+		direction.z = 1
+	end
+	
+	-- Normalizing the direction vector
+	if vmath.length(direction) > 0 then
+		direction = vmath.normalize(direction)
+	end
+
+	-- Getting camera rotation
+	local camera_angle = go.get("/camera#camera_controller", "angle_y")
+	local camera_rotation = vmath.quat_rotation_y(camera_angle)
+
+	-- Setting the result
+	self.velocity_direction = vmath.rotate(camera_rotation, direction)
+end
+
+function init(self)
+	-- Acquiring input focus
+	msg.post(".", "acquire_input_focus")
+
+	-- Defining state variables
+	self.inputs = {
+		up = false,
+		down = false,
+		left = false,
+		right = false
+	}
+	self.velocity_direction = vmath.vector3()
+	self.velocity = 0
+end
+
+function update(self, dt)
+	-- Updating target velocity direction
+	update_target_velocity_direction(self)
+
+	-- Checking if movement is going on
+	if vmath.length(self.velocity_direction) <= 0 then
+		self.velocity = vmath.length(go.get("#collisionobject", "angular_velocity"))
+		return
+	end
+
+	-- Calculating velocity
+	self.velocity = tween.move_towards(self.velocity, self.max_velocity, self.acceleration * dt)
+	
+	-- Setting angular velocity
+	print("Previous angular velocity:", go.get("#collisionobject", "angular_velocity"))
+	go.set("#collisionobject", "angular_velocity", self.velocity_direction * self.velocity)
+	print("Angular velocity set:", go.get("#collisionobject", "angular_velocity"), "Linear velocity:", go.get("#collisionobject", "linear_velocity"))
+end
+
+function on_input(self, action_id, action)
+	-- Checking for action
+	if action_id == hash("up") then
+		if action.pressed then
+			self.inputs.up = true
+		elseif action.released then
+			self.inputs.up = false
+		end
+	elseif action_id == hash("down") then
+		if action.pressed then
+			self.inputs.down = true
+		elseif action.released then
+			self.inputs.down = false
+		end
+	elseif action_id == hash("left") then
+		if action.pressed then
+			self.inputs.left = true
+		elseif action.released then
+			self.inputs.left = false
+		end
+	elseif action_id == hash("right") then
+		if action.pressed then
+			self.inputs.right = true
+		elseif action.released then
+			self.inputs.right = false
+		end
+	end
+end
