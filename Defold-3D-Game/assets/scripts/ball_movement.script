@@ -51,7 +51,10 @@ function init(self)
 	self.velocity = 0
 end
 
-function update(self, dt)
+function fixed_update(self, dt)
+	-- Waking up the ball to avoid the movement from locking
+	physics.wakeup("#collisionobject")
+	
 	-- Updating target velocity direction
 	update_target_velocity_direction(self)
 
@@ -65,9 +68,7 @@ function update(self, dt)
 	self.velocity = tween.move_towards(self.velocity, self.max_velocity, self.acceleration * dt)
 	
 	-- Setting angular velocity
-	print("Previous angular velocity:", go.get("#collisionobject", "angular_velocity"))
 	go.set("#collisionobject", "angular_velocity", self.velocity_direction * self.velocity)
-	print("Angular velocity set:", go.get("#collisionobject", "angular_velocity"), "Linear velocity:", go.get("#collisionobject", "linear_velocity"))
 end
 
 function on_input(self, action_id, action)

@@ -22,7 +22,7 @@ function init(self)
 	self.target_angle_y = 0
 end
 
-function update(self, dt)
+function fixed_update(self, dt)
 	-- Getting info of the ball
 	local ball_pos = go.get_position("/ball")
 	local ball_velocity = go.get("/ball#collisionobject", "linear_velocity")
