@@ -1,0 +1,25 @@
+function init(self)
+	-- Acquiring inputu focus
+	msg.post(".", "acquire_input_focus")
+end
+
+function on_input(self, action_id, action)
+	-- Checking if a button is pressed
+	if action_id == hash("touch") and action.pressed then
+		-- Getting the buttons
+		local play_button = gui.get_node("play_button")
+		local exit_button = gui.get_node("exit_button")
+
+		-- Checking if play button was pressed
+		if gui.pick_node(play_button, action.x, action.y) then
+			-- Loading level 1
+			msg.post("main:/collection_manager#loader", "load_level", { level_id = 1 })
+			print("Play button pressed")
+		end
+
+		-- Checking if exit button was pressed
+		if gui.pick_node(exit_button, action.x, action.y) then
+			print("Exit button pressed")
+		end
+	end
+end

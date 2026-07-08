@@ -1,6 +1,6 @@
 components {
   id: "quad_2x2"
-  component: "/assets/modules/models/quad_2x2.model"
+  component: "/assets/models/quad_2x2.model"
   rotation {
     x: -0.70710677
     w: 0.70710677
@@ -8,7 +8,7 @@ components {
 }
 components {
   id: "death_object"
-  component: "/assets/scripts/obstacles/death_object.script"
+  component: "/main/scripts/obstacles/death_object.script"
 }
 embedded_components {
   id: "collisionobject"

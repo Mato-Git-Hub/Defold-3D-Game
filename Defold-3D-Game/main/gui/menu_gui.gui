@@ -1,0 +1,131 @@
+script: "/main/scripts/menu_gui/menu.gui_script"
+fonts {
+  name: "default"
+  font: "/builtins/fonts/default.font"
+}
+nodes {
+  position {
+    x: 300.0
+    y: 120.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_BOX
+  id: "play_button"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 190.0
+    y: 90.0
+  }
+  type: TYPE_BOX
+  id: "play_button_base"
+  parent: "play_button"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  scale {
+    x: 3.5
+    y: 3.5
+    z: 3.5
+  }
+  size {
+    x: 50.0
+    y: 25.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Play"
+  font: "default"
+  id: "play_text"
+  parent: "play_button_base"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 480.0
+    y: 570.0
+  }
+  scale {
+    x: 5.0
+    y: 5.0
+    z: 5.0
+  }
+  size {
+    x: 125.0
+    y: 25.0
+  }
+  type: TYPE_TEXT
+  text: "A marble game"
+  font: "default"
+  id: "title"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 660.0
+    y: 120.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_BOX
+  id: "exit_button"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 190.0
+    y: 90.0
+  }
+  type: TYPE_BOX
+  id: "exit_button_base"
+  parent: "exit_button"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  scale {
+    x: 3.5
+    y: 3.5
+    z: 3.5
+  }
+  size {
+    x: 50.0
+    y: 25.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Quit"
+  font: "default"
+  id: "exit_text"
+  parent: "exit_button_base"
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

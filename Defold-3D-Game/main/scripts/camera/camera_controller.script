@@ -1,9 +1,9 @@
 -- Requiring modules
-local tween = require "assets.modules.tween"
+local tween = require "main.modules.tween"
 
 -- Defining properites
 go.property("camera_angle", -40)
-go.property("track_distance", 20)
+go.property("track_distance", 10)
 go.property("rotation_speed", 120)
 go.property("update_velocity_treshold", 1.5)
 

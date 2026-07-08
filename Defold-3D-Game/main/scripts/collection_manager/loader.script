@@ -1,0 +1,33 @@
+function init(self)
+	-- Acquiring input focus so that loaded collections can handle input
+	msg.post(".", "acquire_input_focus")
+
+	-- Defining state variables
+	self.proxy_url = "#main_menu"
+
+	-- Loading the main menu
+	msg.post(self.proxy_url, "load")
+end
+
+function on_message(self, message_id, message, sender)
+	-- Listening for message to load a level
+	if message_id == hash("load_level") then
+		-- Unloading previous collection
+		msg.post(self.proxy_url, "disable")
+		msg.post(self.proxy_url, "final")
+		msg.post(self.proxy_url, "unload")
+
+		-- Updating the proxy url
+		self.proxy_url = "#level_" .. message.level_id
+
+		-- Loading new level
+		msg.post(self.proxy_url, "load")
+	end
+
+	-- Listening for level loaded
+	if message_id == hash("proxy_loaded") then
+		-- Enabling the level
+		msg.post(sender, "init")
+		msg.post(sender, "enable")
+	end
+end

@@ -1,14 +1,16 @@
 components {
   id: "cube"
-  component: "/assets/modules/models/cube.model"
+  component: "/assets/models/cube.model"
+  position {
+    y: 0.5
+  }
 }
 components {
-  id: "checkpoint_animation"
-  component: "/assets/scripts/checkpoint/checkpoint_animation.script"
-}
-components {
-  id: "checkpoint_spawnpoint_setting"
-  component: "/assets/scripts/checkpoint/checkpoint_spawnpoint_setting.script"
+  id: "cube1"
+  component: "/assets/models/cube.model"
+  position {
+    y: 1.5
+  }
 }
 embedded_components {
   id: "collisionobject"
@@ -23,6 +25,7 @@ embedded_components {
   "  shapes {\n"
   "    shape_type: TYPE_BOX\n"
   "    position {\n"
+  "      y: 1.0\n"
   "    }\n"
   "    rotation {\n"
   "    }\n"
@@ -31,10 +34,8 @@ embedded_components {
   "    id: \"box\"\n"
   "  }\n"
   "  data: 0.5\n"
-  "  data: 0.5\n"
+  "  data: 1.0\n"
   "  data: 0.5\n"
   "}\n"
-  "event_collision: false\n"
-  "event_contact: false\n"
   ""
 }

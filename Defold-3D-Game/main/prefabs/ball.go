@@ -1,21 +1,21 @@
 components {
   id: "ball_movement"
-  component: "/assets/scripts/ball/ball_movement.script"
+  component: "/main/scripts/ball/ball_movement.script"
 }
 components {
   id: "sphere"
-  component: "/assets/modules/models/sphere.model"
+  component: "/assets/models/sphere.model"
 }
 components {
   id: "ball_respawn"
-  component: "/assets/scripts/ball/ball_respawn.script"
+  component: "/main/scripts/ball/ball_respawn.script"
 }
 embedded_components {
   id: "collisionobject"
   type: "collisionobject"
   data: "type: COLLISION_OBJECT_TYPE_DYNAMIC\n"
-  "mass: 1.0\n"
-  "friction: 0.75\n"
+  "mass: 100.0\n"
+  "friction: 1.0\n"
   "restitution: 0.0\n"
   "group: \"default\"\n"
   "mask: \"default\"\n"

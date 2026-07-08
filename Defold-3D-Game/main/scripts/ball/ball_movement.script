@@ -1,5 +1,5 @@
 -- Requiring modules
-local tween = require "assets.modules.tween"
+local tween = require "main.modules.tween"
 
 -- Defining properties
 go.property("acceleration", 7.5)

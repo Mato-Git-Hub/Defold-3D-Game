@@ -1,0 +1,2 @@
+-- Defining properties
+go.property("angle_y", 0)
