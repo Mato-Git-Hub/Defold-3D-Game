@@ -1,6 +1,6 @@
 components {
   id: "camera_controller"
-  component: "/assets/scripts/camera_controller.script"
+  component: "/assets/scripts/camera/camera_controller.script"
 }
 embedded_components {
   id: "camera"

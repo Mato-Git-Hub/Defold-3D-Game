@@ -1,10 +1,14 @@
 components {
   id: "ball_movement"
-  component: "/assets/scripts/ball_movement.script"
+  component: "/assets/scripts/ball/ball_movement.script"
 }
 components {
   id: "sphere"
   component: "/assets/modules/models/sphere.model"
+}
+components {
+  id: "ball_respawn"
+  component: "/assets/scripts/ball/ball_respawn.script"
 }
 embedded_components {
   id: "collisionobject"

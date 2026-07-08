@@ -1,0 +1,62 @@
+-- Defining properties
+go.property("movement_amplitude", 1)
+go.property("movement_frequency", 0.25)
+
+go.property("rotation_frequency_x", 0.1)
+go.property("rotation_frequency_y", 0.1)
+
+-- Function to update movement
+local function update_movement(self, dt)
+	-- Updating the movement time
+	self.movement_time = (self.movement_time + dt) % self.movement_period
+
+	-- Updating the position offset
+	self.position_offset = vmath.vector3(0, math.pow(math.sin(self.movement_time * self.movement_frequency) * self.movement_amplitude, 2), 0)
+
+	-- Setting position
+	go.set_position(self.original_position + self.position_offset, "#cube")
+end
+
+-- Function to update rotation
+local function update_rotation(self, dt)
+	-- Updating rotation times
+	self.rotation_time_x = (self.rotation_time_x + dt) % self.rotation_period_x
+	self.rotation_time_y = (self.rotation_time_y + dt) % self.rotation_period_y
+
+	-- Updating the rotations offsets
+	self.rotation_offset_x = vmath.quat_rotation_x(2 * math.pi * math.sin(self.rotation_time_x * self.rotation_frequency_x))
+	self.rotation_offset_y = vmath.quat_rotation_y(2 * math.pi * math.sin(self.rotation_time_y * self.rotation_frequency_y))
+
+	-- Setting rotation
+	go.set_rotation(self.original_rotation * self.rotation_offset_x * self.rotation_offset_y, "#cube")
+end
+
+function init(self)
+	-- Defining constants
+	self.original_position = go.get_position("#cube")
+	self.movement_period = 1 / self.movement_frequency
+	self.movement_frequency = 2 * math.pi * self.movement_frequency
+
+	self.original_rotation = go.get_rotation("#cube")
+	self.rotation_period_x = 1 / self.rotation_frequency_x
+	self.rotation_period_y = 1 / self.rotation_frequency_y
+	self.rotation_frequency_x = 2 * math.pi * self.rotation_frequency_x
+	self.rotation_frequency_y = 2 * math.pi * self.rotation_frequency_y
+	
+	-- Defining state variables
+	self.position_offset = vmath.vector3()
+	self.movement_time = math.random(1000) % self.movement_period
+
+	self.rotation_offset_x = vmath.quat()
+	self.rotation_offset_y = vmath.quat()
+	self.rotation_time_x = math.random(1000) % self.rotation_period_x
+	self.rotation_time_y = math.random(1000) % self.rotation_period_y
+end
+
+function update(self, dt)
+	-- Updating movement
+	update_movement(self, dt)
+
+	-- Updating rotation
+	update_rotation(self, dt)
+end

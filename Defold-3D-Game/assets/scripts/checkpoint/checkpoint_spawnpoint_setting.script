@@ -1,0 +1,19 @@
+-- Defining properties
+go.property("checkpoint_priority", 0)
+
+function init(self)
+	-- Defining constants
+	self.spawn_point_posittion = go.get_position(".")
+end
+
+function on_message(self, message_id, message, sender)
+	-- Checking for collision with the ball
+	if message_id == hash("trigger_response") and message.enter and message.other_id == hash("/ball") then
+		-- Informing player about the checkpoint collision
+		local checkpoint_message = {
+			priority = self.checkpoint_priority,
+			position = self.spawn_point_posittion
+		}
+		msg.post("/ball#ball_respawn", "ball_checkpoint", checkpoint_message)
+	end
+end
