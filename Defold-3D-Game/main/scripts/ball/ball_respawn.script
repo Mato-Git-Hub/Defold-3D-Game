@@ -1,16 +1,7 @@
 function init(self)
 	-- Defining state variables
-	self.respawning = false
 	self.spawn_point = go.get_position(".")
 	self.current_checkpoint_priority = 0
-end
-
-function fixed_update(self, dt)
-	-- Checking if respawning
-	if self.respawning then
-		msg.post("#collisionobject", "enable")
-		self.respawning = false
-	end
 end
 
 function on_message(self, message_id, message, sender)
@@ -19,12 +10,17 @@ function on_message(self, message_id, message, sender)
 		-- Disabling the collision object to allow position setting
 		msg.post("#collisionobject", "disable")
 
-		-- Moving the position and sending message to reset movement
+		-- Setting the position
 		go.set_position(self.spawn_point, ".")
-		msg.post("#ball_movement", "respawned")
 
-		-- Setting respawning to true to enable the collision object the next frame
-		self.respawning = true
+		-- Setting a timer to re-enable the collision object
+		timer.delay(0.2, false, function()
+			-- Enabling the collision object
+			msg.post("#collisionobject", "enable")
+
+			-- Sending message to reset velocity
+			msg.post("#ball_movement", "respawned")
+		end)
 	end
 	
 	-- Checking for checkpoint collision

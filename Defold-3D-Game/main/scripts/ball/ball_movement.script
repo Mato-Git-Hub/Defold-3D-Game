@@ -1,26 +1,22 @@
--- Requiring modules
-local tween = require "main.modules.tween"
-
 -- Defining properties
-go.property("acceleration", 7.5)
-go.property("max_velocity", 75)
+go.property("torque_force", 5)
 
 -- Function to update target velocity direction
-local function update_target_velocity_direction(self)
+local function update_force_direction(self)
 	-- Setting base direction
 	local direction = vmath.vector3(0, 0, 0)
 
 	-- Updating direction based on inputs
 	if self.inputs.up then
-		direction.x = -1
+		direction.z = -1
 	elseif self.inputs.down then
-		direction.x = 1
+		direction.z = 1
 	end
 
 	if self.inputs.right then
-		direction.z = -1
+		direction.x = 1
 	elseif self.inputs.left then
-		direction.z = 1
+		direction.x = -1
 	end
 	
 	-- Normalizing the direction vector
@@ -33,12 +29,15 @@ local function update_target_velocity_direction(self)
 	local camera_rotation = vmath.quat_rotation_y(camera_angle)
 
 	-- Setting the result
-	self.velocity_direction = vmath.rotate(camera_rotation, direction)
+	self.force_direction = vmath.rotate(camera_rotation, direction)
 end
 
 function init(self)
 	-- Acquiring input focus
 	msg.post(".", "acquire_input_focus")
+
+	-- Defining constants
+	self.radius = physics.get_shape("#collisionobject", "sphere").diameter / 2
 
 	-- Defining state variables
 	self.inputs = {
@@ -47,35 +46,27 @@ function init(self)
 		left = false,
 		right = false
 	}
-	self.velocity_direction = vmath.vector3()
-	self.velocity = 0
+	self.force_direction = vmath.vector3()
 end
 
-function fixed_update(self, dt)
+function update(self, dt)
 	-- Updating target velocity direction
-	update_target_velocity_direction(self)
+	update_force_direction(self)
 
-	-- Checking if movement is going on
-	if vmath.length(self.velocity_direction) <= 0 then
-		self.velocity = vmath.length(go.get("#collisionobject", "angular_velocity"))
-		return
+	-- Making sure force should be applied
+	if vmath.length(self.force_direction) > 0 then
+		-- Calculating the position to apply force
+		local force_position = go.get_position(".") + vmath.vector3(0, self.radius, 0)
+
+		-- Applying the force
+		msg.post("#collisionobject", "apply_force", { force = self.force_direction * self.torque_force, position = force_position })
 	end
-
-	-- Waking up the ball to avoid the movement from locking
-	physics.wakeup("#collisionobject")
-
-	-- Calculating velocity
-	self.velocity = tween.move_towards(self.velocity, self.max_velocity, self.acceleration * dt)
-	
-	-- Setting angular velocity
-	go.set("#collisionobject", "angular_velocity", self.velocity_direction * self.velocity)
 end
 
 function on_message(self, message_id, message, sender)
 	-- Checking for respawn message
 	if message_id == hash("respawned") then
 		-- Resetting velocity
-		self.velocity = 0
 		go.set("#collisionobject", "angular_velocity", vmath.vector3(0, 0, 0))
 		go.set("#collisionobject", "linear_velocity", vmath.vector3(0, 0, 0))
 	end

@@ -17,21 +17,26 @@ function M.move_towards_angle(angle, target, difference)
 	return angle
 end
 
--- Function to move a value towards given target
-function M.move_towards(value, target, difference)
-	-- Calulcating the distance between the values
-	local distance = target - value
+-- Function to move a vector towards given target
+function M.move_towards_vector(vector, target, difference)
+	-- Calculating the vector from vector to target
+	local direction_vector = target - vector
 
-	-- Checking if the value is already close enough
-	if math.abs(distance) < difference then
+	-- Checking if the vector is already close enough
+	if vmath.length(direction_vector) < difference then
 		return target
 	end
 
-	-- Updating the value
-	value = value + difference * math.abs(distance) / distance
+	-- Normalizing the direction vector
+	if vmath.length(direction_vector) > 0 then
+		direction_vector = vmath.normalize(direction_vector)
+	end
+
+	-- Updating the vector
+	vector = vector + direction_vector * difference
 
 	-- Returning the result
-	return value
+	return vector
 end
 
 return M

@@ -3,26 +3,65 @@ local tween = require "main.modules.tween"
 
 -- Defining properites
 go.property("camera_angle", -40)
-go.property("track_distance", 10)
 go.property("rotation_speed", 120)
 go.property("update_velocity_treshold", 1.5)
 
+go.property("min_track_distance", 10)
+go.property("max_track_distance", 25)
+go.property("max_track_distance_velocity", 20)
+
+go.property("min_camera_speed", 25)
+go.property("max_camera_speed", 200)
+go.property("max_camera_speed_distance", 35)
+
+-- Defining state variables that need to be accessed by other scripts
 go.property("angle_y", 0)
+
+-- Function to calculate the current track distance
+local function calculate_track_distance(self, ball_velocity)
+	-- Calculating the distance based of max track distance velocity
+	local track_distance = vmath.length(ball_velocity) / self.max_track_distance_velocity * self.max_track_distance
+
+	-- Making sure tthe distance doesn't get out of bounds
+	track_distance = math.max(self.min_track_distance, math.min(self.max_track_distance, track_distance))
+
+	-- Calculating the distances separately for zx plane and y axis
+	self.xz_distance = track_distance * math.cos(self.camera_angle)
+	self.y_distance = -track_distance * math.sin(self.camera_angle)
+
+	print("Track distance:", track_distance)
+end
+
+-- Function to calculate the current camera speed
+local function get_camera_speed(self, target_position)
+	-- Calculating the difference between position and target position
+	local difference = vmath.length(target_position - self.position)
+
+	-- Calulcating the speed based of max camera speed distance
+	local camera_speed = difference / self.max_camera_speed_distance * self.max_camera_speed
+
+	-- Making sure the speed doesn't go out of bounds
+	camera_speed = math.max(self.min_camera_speed, math.min(self.max_camera_speed, camera_speed))
+
+	-- Returning the result
+	return camera_speed
+end
 
 function init(self)
 	-- Defining constants
 	self.camera_angle = math.rad(self.camera_angle)
-	self.xz_distance = self.track_distance * math.cos(self.camera_angle)
-	self.y_distance = -self.track_distance * math.sin(self.camera_angle)
-
 	self.rotation_speed = math.rad(self.rotation_speed)
 
 	-- Defining state variables
 	self.angle_y = 0
 	self.target_angle_y = 0
+	
+	self.position = go.get_position("/ball")
+	self.xz_distance = self.min_track_distance * math.cos(self.camera_angle)
+	self.y_distance = -self.min_track_distance * math.sin(self.camera_angle)
 end
 
-function fixed_update(self, dt)
+function update(self, dt)
 	-- Getting info of the ball
 	local ball_pos = go.get_position("/ball")
 	local ball_velocity = go.get("/ball#collisionobject", "linear_velocity")
@@ -38,7 +77,13 @@ function fixed_update(self, dt)
 	local rotation = vmath.quat_rotation_y(self.angle_y) * vmath.quat_rotation_x(self.camera_angle)
 	go.set_rotation(rotation, ".")
 
-	-- Calculating new location of the camera
-	local position = ball_pos + vmath.vector3(self.xz_distance * math.sin(self.angle_y), self.y_distance, self.xz_distance * math.cos(self.angle_y))
-	go.set_position(position, ".")
+	-- Updating camera track distance
+	calculate_track_distance(self, ball_velocity)
+
+	-- Calculating new target location of the camera
+	local target_position = ball_pos + vmath.vector3(self.xz_distance * math.sin(self.angle_y), self.y_distance, self.xz_distance * math.cos(self.angle_y))
+
+	-- Updating the position
+	self.position = tween.move_towards_vector(self.position, target_position, get_camera_speed(self, target_position) * dt)
+	go.set_position(self.position, ".")
 end

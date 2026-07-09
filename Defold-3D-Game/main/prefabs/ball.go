@@ -32,7 +32,8 @@ embedded_components {
   "  }\n"
   "  data: 0.5\n"
   "}\n"
-  "linear_damping: 0.5\n"
+  "linear_damping: 0.1\n"
   "angular_damping: 0.5\n"
+  "bullet: true\n"
   ""
 }
