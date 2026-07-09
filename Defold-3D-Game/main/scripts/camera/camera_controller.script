@@ -28,8 +28,6 @@ local function calculate_track_distance(self, ball_velocity)
 	-- Calculating the distances separately for zx plane and y axis
 	self.xz_distance = track_distance * math.cos(self.camera_angle)
 	self.y_distance = -track_distance * math.sin(self.camera_angle)
-
-	print("Track distance:", track_distance)
 end
 
 -- Function to calculate the current camera speed

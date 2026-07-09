@@ -12,6 +12,10 @@ components {
     y: 1.5
   }
 }
+components {
+  id: "level_completion_tracker"
+  component: "/main/scripts/goal/level_completion_tracker.script"
+}
 embedded_components {
   id: "collisionobject"
   type: "collisionobject"

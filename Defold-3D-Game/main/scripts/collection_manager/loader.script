@@ -3,7 +3,7 @@ function init(self)
 	msg.post(".", "acquire_input_focus")
 
 	-- Defining state variables
-	self.proxy_url = "#main_menu"
+	self.proxy_url = "#level_0"
 
 	-- Loading the main menu
 	msg.post(self.proxy_url, "load")

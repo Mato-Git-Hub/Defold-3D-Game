@@ -1,64 +1,12 @@
-script: "/main/scripts/gui/menu.gui_script"
+script: "/main/scripts/gui/level_complete_gui.gui_script"
 fonts {
   name: "default"
   font: "/builtins/fonts/default.font"
 }
 nodes {
   position {
-    x: 300.0
-    y: 120.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  type: TYPE_BOX
-  id: "play_button"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
-  size {
-    x: 190.0
-    y: 90.0
-  }
-  type: TYPE_BOX
-  id: "play_button_base"
-  parent: "play_button"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
-  scale {
-    x: 3.5
-    y: 3.5
-    z: 3.5
-  }
-  size {
-    x: 50.0
-    y: 25.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  type: TYPE_TEXT
-  text: "Play"
-  font: "default"
-  id: "play_text"
-  parent: "play_button_base"
-  inherit_alpha: true
-}
-nodes {
-  position {
     x: 480.0
-    y: 570.0
+    y: 450.0
   }
   scale {
     x: 5.0
@@ -70,15 +18,15 @@ nodes {
     y: 25.0
   }
   type: TYPE_TEXT
-  text: "A marble game"
+  text: "Level complete!"
   font: "default"
-  id: "title"
+  id: "level_complete_text"
   inherit_alpha: true
 }
 nodes {
   position {
-    x: 660.0
-    y: 120.0
+    x: 325.0
+    y: 225.0
   }
   size {
     x: 200.0
@@ -90,7 +38,7 @@ nodes {
     z: 0.0
   }
   type: TYPE_BOX
-  id: "exit_button"
+  id: "next_button"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
@@ -100,8 +48,8 @@ nodes {
     y: 90.0
   }
   type: TYPE_BOX
-  id: "exit_button_base"
-  parent: "exit_button"
+  id: "next_button_base"
+  parent: "next_button"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
@@ -121,10 +69,62 @@ nodes {
     z: 0.0
   }
   type: TYPE_TEXT
-  text: "Quit"
+  text: "Next"
   font: "default"
-  id: "exit_text"
-  parent: "exit_button_base"
+  id: "next_text"
+  parent: "next_button_base"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 635.0
+    y: 225.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_BOX
+  id: "menu_button"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 190.0
+    y: 90.0
+  }
+  type: TYPE_BOX
+  id: "menu_button_base"
+  parent: "menu_button"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  scale {
+    x: 3.5
+    y: 3.5
+    z: 3.5
+  }
+  size {
+    x: 50.0
+    y: 25.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Menu"
+  font: "default"
+  id: "menu_text"
+  parent: "menu_button_base"
   inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"

@@ -1,0 +1,16 @@
+-- Defining properties
+go.property("next_level", 0)
+
+function on_message(self, message_id, message, sender)
+	-- Checking for collision with the ball
+	if message_id == hash("trigger_response") and message.enter and message.other_id == hash("/ball") then
+		-- Sending level complete message
+		msg.post("/level_complete_ui#level_complete_gui", "level_completed")
+	end
+
+	-- Checking if have to load a new level
+	if message_id == hash("load_next_level") then
+		-- Loading the next level
+		msg.post("main:/collection_manager#loader", "load_level", { level_id = self.next_level })
+	end
+end
