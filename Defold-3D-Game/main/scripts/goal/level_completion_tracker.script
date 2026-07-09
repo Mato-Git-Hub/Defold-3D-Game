@@ -4,8 +4,13 @@ go.property("next_level", 0)
 function on_message(self, message_id, message, sender)
 	-- Checking for collision with the ball
 	if message_id == hash("trigger_response") and message.enter and message.other_id == hash("/ball") then
-		-- Sending level complete message
+		-- Sending level complete message to the ui and to the camera
 		msg.post("/level_complete_ui#level_complete_gui", "level_completed")
+		msg.post("/camera#camera_level_completed_animation", "level_completed")
+		msg.post("/camera#camera_controller", "level_completed")
+
+		-- Stopping the ball
+		msg.post("/ball#collisionobject", "disable")
 	end
 
 	-- Checking if have to load a new level

@@ -1,0 +1,62 @@
+-- Requiring modules
+local tween = require "main.modules.tween"
+
+-- Defining properties
+go.property("distance", 20)
+go.property("camera_angle", -30)
+
+go.property("movement_speed", 25)
+go.property("rotation_speed", 30)
+
+function init(self)
+	-- Defining constants
+	self.camera_angle = math.rad(self.camera_angle)
+	self.rotation_speed = math.rad(self.rotation_speed)
+
+	self.xz_distance = self.distance * math.cos(self.camera_angle)
+	self.y_distance = -self.distance * math.sin(self.camera_angle)
+
+	self.ball_position = vmath.vector3(0, 0, 0)
+
+	-- Defining state variables
+	self.level_completed = false
+	self.angle_y = 0
+	self.position = vmath.vector3(0, 0, 0)
+	self.current_camera_angle = 0
+end
+
+function update(self, dt)
+	-- Checking if level is still in progress
+	if not self.level_completed then return end
+
+	-- Updating angle while keeping it in the range of [0, 2pi]
+	self.angle_y = (self.angle_y + self.rotation_speed * dt) % (2 * math.pi)
+
+	-- Updating the camera angle
+	self.current_camera_angle = tween.move_towards_angle(self.current_camera_angle, self.camera_angle, self.rotation_speed * dt)
+
+	-- Setting the rotation
+	local rotation = vmath.quat_rotation_y(self.angle_y) * vmath.quat_rotation_x(self.current_camera_angle)
+	go.set_rotation(rotation, ".")
+
+	-- Calculating target position
+	local target_position = self.ball_position + vmath.vector3(self.xz_distance * math.sin(self.angle_y), self.y_distance, self.xz_distance * math.cos(self.angle_y))
+
+	-- Updating the position
+	self.position = tween.move_towards_vector(self.position, target_position, self.movement_speed * dt)
+	go.set_position(self.position, ".")
+end
+
+function on_message(self, message_id, message, sender)
+	-- Checking if level was completed
+	if message_id == hash("level_completed") then
+		-- Updating level completion status
+		self.level_completed = true
+
+		-- Getting current properties
+		self.position = go.get_position(".")
+		self.ball_position = go.get_position("/ball")
+		self.angle_y = go.get("#camera_controller", "angle_y")
+		self.current_camera_angle = go.get("#camera_controller", "camera_angle")
+	end
+end

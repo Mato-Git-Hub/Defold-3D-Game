@@ -51,15 +51,20 @@ function init(self)
 	self.rotation_speed = math.rad(self.rotation_speed)
 
 	-- Defining state variables
+	self.level_completed = false
+
 	self.angle_y = 0
 	self.target_angle_y = 0
 	
-	self.position = go.get_position("/ball")
+	self.position = vmath.vector3(0, 0, 0)
 	self.xz_distance = self.min_track_distance * math.cos(self.camera_angle)
 	self.y_distance = -self.min_track_distance * math.sin(self.camera_angle)
 end
 
 function update(self, dt)
+	-- Checking if level was already completed
+	if self.level_completed then return end
+
 	-- Getting info of the ball
 	local ball_pos = go.get_position("/ball")
 	local ball_velocity = go.get("/ball#collisionobject", "linear_velocity")
@@ -84,4 +89,11 @@ function update(self, dt)
 	-- Updating the position
 	self.position = tween.move_towards_vector(self.position, target_position, get_camera_speed(self, target_position) * dt)
 	go.set_position(self.position, ".")
+end
+
+function on_message(self, message_id, message, sender)
+	-- Checking if level was completed
+	if message_id == hash("level_completed") then
+		self.level_completed = true
+	end
 end
