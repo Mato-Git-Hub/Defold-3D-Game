@@ -6,10 +6,6 @@ components {
   id: "sphere"
   component: "/assets/models/sphere.model"
 }
-components {
-  id: "ball_respawn"
-  component: "/main/scripts/ball/ball_respawn.script"
-}
 embedded_components {
   id: "collisionobject"
   type: "collisionobject"

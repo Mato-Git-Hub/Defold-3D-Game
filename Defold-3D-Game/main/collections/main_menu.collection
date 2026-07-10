@@ -1,12 +1,5 @@
 name: "main_menu"
 instances {
-  id: "ball"
-  prototype: "/main/prefabs/ball.go"
-  position {
-    y: 1.0
-  }
-}
-instances {
   id: "map_bottom"
   prototype: "/main/prefabs/map_bottom.go"
   position {
@@ -16,6 +9,18 @@ instances {
     x: 100.0
     y: 100.0
     z: 100.0
+  }
+}
+instances {
+  id: "ball_spawner"
+  prototype: "/main/prefabs/ball_spawner.go"
+  component_properties {
+    id: "ball_spawner"
+    properties {
+      id: "start_pos"
+      value: "0.0, 1.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
   }
 }
 scale_along_z: 0

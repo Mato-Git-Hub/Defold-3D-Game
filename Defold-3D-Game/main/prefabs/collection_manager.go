@@ -38,3 +38,9 @@ embedded_components {
   data: "collection: \"/main/collections/level_5.collection\"\n"
   ""
 }
+embedded_components {
+  id: "level_6"
+  type: "collectionproxy"
+  data: "collection: \"/main/collections/level_6.collection\"\n"
+  ""
+}

@@ -8,12 +8,12 @@ end
 
 function on_message(self, message_id, message, sender)
 	-- Checking for collision with the ball
-	if message_id == hash("trigger_response") and message.enter and message.other_id == hash("/ball") then
+	if message_id == hash("trigger_response") and message.enter and message.other_id == hash(go.get("/ball_spawner#ball_spawner", "ball_id")) then
 		-- Informing player about the checkpoint collision
 		local checkpoint_message = {
 			priority = self.checkpoint_priority,
 			position = self.spawn_point_posittion
 		}
-		msg.post("/ball#ball_respawn", "ball_checkpoint", checkpoint_message)
+		msg.post("/ball_spawner#ball_spawner", "ball_checkpoint", checkpoint_message)
 	end
 end

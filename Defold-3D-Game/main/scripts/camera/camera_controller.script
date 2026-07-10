@@ -1,5 +1,6 @@
 -- Requiring modules
 local tween = require "main.modules.tween"
+local go_help = require "main.modules.go_help"
 
 -- Defining properites
 go.property("camera_angle", -40)
@@ -8,7 +9,7 @@ go.property("update_velocity_treshold", 1.5)
 
 go.property("min_track_distance", 10)
 go.property("max_track_distance", 25)
-go.property("max_track_distance_velocity", 20)
+go.property("max_track_distance_velocity", 15)
 
 go.property("min_camera_speed", 25)
 go.property("max_camera_speed", 200)
@@ -62,12 +63,12 @@ function init(self)
 end
 
 function update(self, dt)
-	-- Checking if level was already completed
-	if self.level_completed then return end
+	-- Checking if level was already completed or if the ball doesn't exist
+	if self.level_completed or not go_help.exists(go.get("/ball_spawner#ball_spawner", "ball_id")) then return end
 
 	-- Getting info of the ball
-	local ball_pos = go.get_position("/ball")
-	local ball_velocity = go.get("/ball#collisionobject", "linear_velocity")
+	local ball_pos = go.get_position(go.get("/ball_spawner#ball_spawner", "ball_id"))
+	local ball_velocity = go.get(go.get("/ball_spawner#ball_spawner", "collisionobject_id"), "linear_velocity")
 
 	-- Calculating the target rotation for y-axis
 	local xz_linear_velocity = math.sqrt(ball_velocity.x * ball_velocity.x + ball_velocity.z * ball_velocity.z)

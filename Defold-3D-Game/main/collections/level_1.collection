@@ -27,14 +27,6 @@ instances {
   }
 }
 instances {
-  id: "ball"
-  prototype: "/main/prefabs/ball.go"
-  position {
-    y: 1.0
-    z: 8.0
-  }
-}
-instances {
   id: "camera"
   prototype: "/main/prefabs/camera.go"
   position {
@@ -45,6 +37,18 @@ instances {
 instances {
   id: "level_complete_ui"
   prototype: "/main/prefabs/level_complete_ui.go"
+}
+instances {
+  id: "ball_spawner"
+  prototype: "/main/prefabs/ball_spawner.go"
+  component_properties {
+    id: "ball_spawner"
+    properties {
+      id: "start_pos"
+      value: "0.0, 1.0, 8.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
 }
 scale_along_z: 0
 embedded_instances {

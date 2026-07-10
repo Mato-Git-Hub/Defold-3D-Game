@@ -1,0 +1,39 @@
+-- Defining properties
+go.property("start_pos", vmath.vector3(0, 0, 0))
+
+-- Defining state variables that need to be accessed by other scripts
+go.property("ball_id", 0)
+go.property("collisionobject_id", 0)
+
+function init(self)
+	-- Defining state variables
+	self.spawn_point = self.start_pos
+	self.current_checkpoint_priority = 0
+
+	-- Creating the first ball
+	self.ball_id = factory.create("#factory", self.spawn_point)
+	self.collisionobject_id = msg.url(nil, self.ball_id, "collisionobject")
+end
+
+function on_message(self, message_id, message, sender)
+	-- Checking for death message
+	if message_id == hash("ball_died") then
+		-- Destroying the previous ball
+		go.delete(self.ball_id)
+
+		-- Creating a new ball and saving the id
+		self.ball_id = factory.create("#factory", self.spawn_point)
+		self.collisionobject_id = msg.url(nil, self.ball_id, "collisionobject")
+	end
+	
+	-- Checking for checkpoint collision
+	if message_id == hash("ball_checkpoint") then
+		print("Checkpoint with priority", message.priority, "and position", message.position)
+		-- Checking the checkpoint priority
+		if message.priority > self.current_checkpoint_priority then
+			-- Updating checkpoint info
+			self.current_checkpoint_priority = message.priority
+			self.spawn_point = message.position
+		end
+	end
+end

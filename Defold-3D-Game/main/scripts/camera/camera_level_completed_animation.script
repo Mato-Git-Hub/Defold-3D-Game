@@ -1,5 +1,6 @@
 -- Requiring modules
 local tween = require "main.modules.tween"
+local go_help = require "main.modules.go_help"
 
 -- Defining properties
 go.property("distance", 20)
@@ -48,14 +49,14 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	-- Checking if level was completed
-	if message_id == hash("level_completed") then
+	-- Checking if level was completed and the ball exists
+	if message_id == hash("level_completed") and go_help.exists(go.get("/ball_spawner#ball_spawner", "ball_id")) then
 		-- Updating level completion status
 		self.level_completed = true
 
 		-- Getting current properties
 		self.position = go.get_position(".")
-		self.ball_position = go.get_position("/ball")
+		self.ball_position = go.get_position(go.get("/ball_spawner#ball_spawner", "ball_id"))
 		self.angle_y = go.get("#camera_controller", "angle_y")
 		self.current_camera_angle = go.get("#camera_controller", "camera_angle")
 	end
