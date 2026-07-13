@@ -22,4 +22,16 @@ function on_input(self, action_id, action)
 			sys.exit(0)
 		end
 	end
+
+	-- Checking for keyboard input for the play button
+	if action_id == hash("next") and action.pressed then
+		-- Loading level 1
+		msg.post("main:/collection_manager#loader", "load_level", { level_id = 1 })
+	end
+
+	-- Checking for keyboard input for the quit button
+	if action_id == hash("menu") and action.pressed then
+		-- Quitting the game
+		sys.exit(0)
+	end
 end

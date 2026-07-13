@@ -30,6 +30,14 @@ key_trigger {
   input: KEY_RIGHT
   action: "right"
 }
+key_trigger {
+  input: KEY_SPACE
+  action: "next"
+}
+key_trigger {
+  input: KEY_ESC
+  action: "menu"
+}
 mouse_trigger {
   input: MOUSE_BUTTON_1
   action: "touch"

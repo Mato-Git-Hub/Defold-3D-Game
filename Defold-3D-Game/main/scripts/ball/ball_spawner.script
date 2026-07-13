@@ -11,7 +11,7 @@ function init(self)
 	self.current_checkpoint_priority = 0
 
 	-- Creating the first ball
-	self.ball_id = factory.create("#factory", self.spawn_point)
+	self.ball_id = factory.create("#ball_factory", self.spawn_point)
 	self.collisionobject_id = msg.url(nil, self.ball_id, "collisionobject")
 end
 
@@ -22,7 +22,7 @@ function on_message(self, message_id, message, sender)
 		go.delete(self.ball_id)
 
 		-- Creating a new ball and saving the id
-		self.ball_id = factory.create("#factory", self.spawn_point)
+		self.ball_id = factory.create("#ball_factory", self.spawn_point)
 		self.collisionobject_id = msg.url(nil, self.ball_id, "collisionobject")
 	end
 	

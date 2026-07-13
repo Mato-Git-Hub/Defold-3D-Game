@@ -37,4 +37,16 @@ function on_input(self, action_id, action)
 			msg.post("main:/collection_manager#loader", "load_level", { level_id = 0 })
 		end
 	end
+
+	-- Checking for keyboard input for the next button
+	if action_id == hash("next") and action.pressed and self.visible then
+		-- Sending message to load the next level
+		msg.post("/goal#level_completion_tracker", "load_next_level")
+	end
+
+	-- Checking for keyboard input for the menu button
+	if action_id == hash("menu") and action.pressed and self.visible then
+		-- Loading menu collection
+		msg.post("main:/collection_manager#loader", "load_level", { level_id = 0 })
+	end
 end

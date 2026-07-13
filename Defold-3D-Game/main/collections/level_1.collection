@@ -50,6 +50,10 @@ instances {
     }
   }
 }
+instances {
+  id: "ball_shadow"
+  prototype: "/main/prefabs/ball_shadow.go"
+}
 scale_along_z: 0
 embedded_instances {
   id: "structures"
@@ -317,7 +321,7 @@ embedded_instances {
   "mass: 0.0\\n"
   "friction: 1.0\\n"
   "restitution: 0.0\\n"
-  "group: \\\"default\\\"\\n"
+  "group: \\\"ground\\\"\\n"
   "mask: \\\"default\\\"\\n"
   "embedded_collision_shape {\\n"
   "  shapes {\\n"

@@ -1,0 +1,54 @@
+-- Requiring modules
+local go_help = require "main.modules.go_help"
+
+-- Defining properties
+go.property("min_shadow_distance", 10)
+go.property("min_shadow_scale", 0.001)
+go.property("max_shadow_scale", 1)
+go.property("shadow_offset", vmath.vector3(0, 0.01, 0))
+
+-- Function to get the shadow scale
+local function get_shadow_scale(self, ball_pos, raycast_result)
+	-- Calculating the distance to ground
+	local distance = vmath.length(raycast_result.position - ball_pos)
+
+	-- Calculating the scale based of the distance for min scale
+	local scale = vmath.lerp(distance / self.min_shadow_distance, self.max_shadow_scale, self.min_shadow_scale)
+
+	-- Making sure the scale doesn't go out of bounds
+	scale = vmath.clamp(scale, self.min_shadow_scale, self.max_shadow_scale)
+
+	-- Returning the result
+	return scale
+end
+
+function update(self, dt)
+	-- Checking if the ball exists
+	if not go_help.exists(go.get("/ball_spawner#ball_spawner", "ball_id")) then return end
+
+	-- Getting the position of the ball
+	local ball_pos = go.get_position(go.get("/ball_spawner#ball_spawner", "ball_id"))
+
+	-- Raycasting for ground
+	local raycast_result = physics.raycast(ball_pos, ball_pos - vmath.vector3(0, self.min_shadow_distance, 0), { hash("ground") })
+
+	-- Checking if there was no hit
+	if not raycast_result then
+		-- Hiding the shadow
+		go.set_scale(vmath.vector3(0.0001), ".")
+
+		-- Moving on to the next cycle
+		return
+	end
+
+	-- Calculating and setting the shadow scale
+	local shadow_scale = get_shadow_scale(self, ball_pos, raycast_result)
+	go.set_scale(shadow_scale, ".")
+
+	-- Calculating and setting the rotation
+	local shadow_rotation = vmath.quat_from_to(vmath.vector3(0, 1, 0), raycast_result.normal)
+	go.set_rotation(shadow_rotation, ".")
+	
+	-- Setting the position
+	go.set_position(raycast_result.position + self.shadow_offset, ".")
+end

@@ -1,6 +1,6 @@
 components {
   id: "quad_2x2"
-  component: "/assets/models/quad_2x2.model"
+  component: "/assets/models/water.model"
   rotation {
     x: -0.70710677
     w: 0.70710677

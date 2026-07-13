@@ -2,9 +2,9 @@ mesh: "/builtins/assets/gltf/quad_2x2.gltf"
 name: "unnamed"
 materials {
   name: "default"
-  material: "/builtins/materials/model.material"
+  material: "/assets/materials/water/water.material"
   textures {
     sampler: "tex0"
-    texture: "/assets/images/empty_texture_1024x1024.png"
+    texture: "/assets/images/white_texture.png"
   }
 }

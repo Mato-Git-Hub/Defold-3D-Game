@@ -3,8 +3,8 @@ components {
   component: "/main/scripts/ball/ball_movement.script"
 }
 components {
-  id: "sphere"
-  component: "/assets/models/sphere.model"
+  id: "ball"
+  component: "/assets/models/ball.model"
 }
 embedded_components {
   id: "collisionobject"
@@ -14,6 +14,7 @@ embedded_components {
   "friction: 1.0\n"
   "restitution: 0.0\n"
   "group: \"default\"\n"
+  "mask: \"ground\"\n"
   "mask: \"default\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
