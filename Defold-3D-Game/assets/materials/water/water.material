@@ -1,4 +1,4 @@
-name: "model"
+name: "water"
 tags: "model"
 vertex_program: "/assets/materials/water/water.vp"
 fragment_program: "/assets/materials/water/water.fp"

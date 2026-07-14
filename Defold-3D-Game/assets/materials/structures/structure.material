@@ -1,4 +1,4 @@
-name: "model"
+name: "structure"
 tags: "model"
 vertex_program: "/assets/materials/structures/structure.vp"
 fragment_program: "/assets/materials/structures/structure.fp"

@@ -73,6 +73,10 @@ instances {
   id: "skybox"
   prototype: "/main/prefabs/skybox.go"
 }
+instances {
+  id: "postprocess"
+  prototype: "/main/prefabs/postprocess.go"
+}
 scale_along_z: 0
 embedded_instances {
   id: "structures"

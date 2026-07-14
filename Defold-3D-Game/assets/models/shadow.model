@@ -2,7 +2,7 @@ mesh: "/assets/meshes/circle.glb"
 name: "unnamed"
 materials {
   name: "default"
-  material: "/assets/materials/ball/ball_shadow.material"
+  material: "/assets/materials/ball/shadow.material"
   textures {
     sampler: "tex0"
     texture: "/assets/images/white_texture.png"

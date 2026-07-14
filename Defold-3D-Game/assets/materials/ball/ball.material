@@ -1,4 +1,4 @@
-name: "model"
+name: "ball"
 tags: "model"
 vertex_program: "/assets/materials/ball/ball.vp"
 fragment_program: "/assets/materials/ball/ball.fp"
