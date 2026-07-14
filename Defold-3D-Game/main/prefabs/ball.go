@@ -6,6 +6,10 @@ components {
   id: "ball"
   component: "/assets/models/ball.model"
 }
+components {
+  id: "ball_shadow"
+  component: "/main/scripts/ball/ball_shadow.script"
+}
 embedded_components {
   id: "collisionobject"
   type: "collisionobject"

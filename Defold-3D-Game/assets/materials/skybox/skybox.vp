@@ -8,31 +8,18 @@
 in highp vec4 position;
 in mediump vec2 texcoord0;
 
-out highp vec4 var_position;
 out mediump vec2 var_texcoord0;
-out highp vec4 var_ball_pos;
 
 uniform vs_uniforms
 {
     mediump mat4 mtx_worldview;
     mediump mat4 mtx_proj;
-    mediump mat4 mtx_world;
-    highp vec4 ball_pos;
 };
 
 void main()
 {
-    // Sending the uv coordinates to fragment shader
-    var_texcoord0 = texcoord0;
-
-    // Calculating the point in the world
     vec4 p = mtx_worldview * vec4(position.xyz, 1.0);
-    var_position = mtx_world * vec4(position.xyz, 1.0);
-
-    // Sending the ball position
-    var_ball_pos = ball_pos;
-
-    // Returning the position
+    var_texcoord0 = texcoord0;
     gl_Position = mtx_proj * p;
 }
 

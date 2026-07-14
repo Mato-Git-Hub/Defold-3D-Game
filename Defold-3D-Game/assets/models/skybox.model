@@ -1,0 +1,10 @@
+mesh: "/assets/meshes/sphere_invenrted.glb"
+name: "skybox"
+materials {
+  name: "default"
+  material: "/assets/materials/skybox/skybox.material"
+  textures {
+    sampler: "tex0"
+    texture: "/assets/images/white_texture.png"
+  }
+}

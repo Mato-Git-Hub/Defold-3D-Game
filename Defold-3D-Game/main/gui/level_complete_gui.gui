@@ -3,6 +3,10 @@ fonts {
   name: "default"
   font: "/builtins/fonts/default.font"
 }
+fonts {
+  name: "outline"
+  font: "/assets/fonts/outline.font"
+}
 nodes {
   position {
     x: 480.0
@@ -19,7 +23,7 @@ nodes {
   }
   type: TYPE_TEXT
   text: "Level complete!"
-  font: "default"
+  font: "outline"
   id: "level_complete_text"
   inherit_alpha: true
 }

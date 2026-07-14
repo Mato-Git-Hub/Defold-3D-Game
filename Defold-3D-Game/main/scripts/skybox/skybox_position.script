@@ -1,0 +1,4 @@
+function update(self, dt)
+	-- Setting position to camera's location
+	go.set_position(go.get_position("/camera"), ".")
+end

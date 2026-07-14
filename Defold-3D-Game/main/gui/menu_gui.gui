@@ -3,6 +3,10 @@ fonts {
   name: "default"
   font: "/builtins/fonts/default.font"
 }
+fonts {
+  name: "outline"
+  font: "/assets/fonts/outline.font"
+}
 nodes {
   position {
     x: 300.0
@@ -71,7 +75,7 @@ nodes {
   }
   type: TYPE_TEXT
   text: "A marble game"
-  font: "default"
+  font: "outline"
   id: "title"
   inherit_alpha: true
 }

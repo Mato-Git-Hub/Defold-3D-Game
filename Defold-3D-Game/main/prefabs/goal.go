@@ -1,13 +1,13 @@
 components {
   id: "cube"
-  component: "/assets/models/cube.model"
+  component: "/assets/models/structure.model"
   position {
     y: 0.5
   }
 }
 components {
   id: "cube1"
-  component: "/assets/models/cube.model"
+  component: "/assets/models/structure.model"
   position {
     y: 1.5
   }

@@ -1,0 +1,5 @@
+function update(self, dt)
+	-- Updating ball position to the render script
+	local p = go.get_position(".")
+	msg.post("@render:", "set_ball_pos", { pos = vmath.vector4(p.x, p.y, p.z, 1) })
+end

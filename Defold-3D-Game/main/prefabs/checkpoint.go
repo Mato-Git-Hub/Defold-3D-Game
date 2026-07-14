@@ -1,6 +1,6 @@
 components {
   id: "cube"
-  component: "/assets/models/cube.model"
+  component: "/assets/models/structure.model"
 }
 components {
   id: "checkpoint_animation"

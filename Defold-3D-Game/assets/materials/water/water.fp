@@ -1,6 +1,8 @@
 #version 140
 
+in highp vec4 var_position;
 in mediump vec2 var_texcoord0;
+in highp vec4 var_ball_pos;
 
 out vec4 out_fragColor;
 
@@ -15,6 +17,7 @@ uniform fs_uniforms
     mediump vec4 wave_params;
     mediump vec4 layer_params;
     highp vec4 time;
+    mediump vec4 ball_shadow_params;
 };
 
 // Creating a function for pseudo random numbers
@@ -94,6 +97,16 @@ void main()
 
     // Applying the water color to the base color
     color = base_color * color;
+
+    // Calculating values needed for ball shadow calculations
+    vec2 ball_shadow = vec2(length(var_ball_pos.xz - var_position.xz), var_ball_pos.y - var_position.y);
+
+    // Calculating ball shadow radius
+    float radius = mix(ball_shadow_params.z, ball_shadow_params.y, (ball_shadow.y - 0.5) / ball_shadow_params.x) * 0.5;
+    radius = clamp(radius, ball_shadow_params.y, ball_shadow_params.z);
+
+    // Checking if shadow should be drawn
+    if (ball_shadow.x <= radius && ball_shadow.y > 0) color = color * vec4(ball_shadow_params.w);
 
     // Applying ambient light and returning result
     out_fragColor = vec4(color.rgb * ambient_light.xyz, 1.0);

@@ -11,6 +11,16 @@ vertex_constants {
   name: "mtx_proj"
   type: CONSTANT_TYPE_PROJECTION
 }
+vertex_constants {
+  name: "mtx_world"
+  type: CONSTANT_TYPE_WORLD
+}
+vertex_constants {
+  name: "ball_pos"
+  type: CONSTANT_TYPE_USER
+  value {
+  }
+}
 fragment_constants {
   name: "ambient_light"
   type: CONSTANT_TYPE_USER
@@ -71,6 +81,16 @@ fragment_constants {
 fragment_constants {
   name: "time"
   type: CONSTANT_TYPE_TIME
+}
+fragment_constants {
+  name: "ball_shadow_params"
+  type: CONSTANT_TYPE_USER
+  value {
+    x: 10.0
+    y: 0.001
+    z: 1.0
+    w: 0.85
+  }
 }
 samplers {
   name: "tex0"
