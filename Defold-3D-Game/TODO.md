@@ -11,7 +11,7 @@
 Here are the steps for creating depth with simple ambient lighting:
 
 * Choose a similar color palette for the water and the sky
-* Create a distance fog shader to blend colors further away
+* Create a distance fog shader to blend colors further away (custom render script for post-process effects)
 * Add a scrolling water texture and a bit darker tint when further away from the camera
 
 
@@ -30,7 +30,7 @@ Here are the steps for making the blocks look not so out of place
 Here are the steps to make moving objects appear more included
 
 * Fix the transparency rendering for transparent shadows
-* Add shadows that adjust by height for all moving objects
+* Add shadows that adjust by height for all moving objects (use a shader)
 
 
 
