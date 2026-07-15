@@ -52,7 +52,7 @@ float fbm(vec2 p)
     // Introducing some variables to use for noise layers
     float value = 0.0;
     float amplitude = 0.5;
-    float frequency = 1.0;
+    float frequency = 5.0;
 
     // Doing 4 layers of noice to achieve chaotic result
     value += amplitude * noise(p * frequency + vec2(time.x * 0.05, time.x * 0.025));

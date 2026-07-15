@@ -25,19 +25,6 @@ instances {
 instances {
   id: "level_complete_ui"
   prototype: "/main/prefabs/level_complete_ui.go"
-  children: "map_bottom"
-}
-instances {
-  id: "map_bottom"
-  prototype: "/main/prefabs/map_bottom.go"
-  position {
-    y: -20.0
-  }
-  scale3 {
-    x: 100.0
-    y: 100.0
-    z: 100.0
-  }
 }
 instances {
   id: "ball_spawner"
@@ -58,6 +45,18 @@ instances {
 instances {
   id: "postprocess"
   prototype: "/main/prefabs/postprocess.go"
+}
+instances {
+  id: "map_bottom"
+  prototype: "/main/prefabs/map_bottom.go"
+  position {
+    y: -20.0
+  }
+  scale3 {
+    x: 500.0
+    y: 500.0
+    z: 500.0
+  }
 }
 scale_along_z: 0
 embedded_instances {

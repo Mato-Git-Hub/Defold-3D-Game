@@ -10,9 +10,9 @@
 
 Here are the steps for creating depth with simple ambient lighting:
 
-* Choose a similar color palette for the water and the sky
-* Create a distance fog shader to blend colors further away (custom render script for post-process effects)
-* Add a scrolling water texture and a bit darker tint when further away from the camera
+* \[X] Choose a similar color palette for the water and the sky
+* \[X] Create a distance fog shader to blend colors further away (custom render script for post-process effects)
+* \[X] Add a scrolling water texture and a bit darker tint when further away from the camera
 
 
 
@@ -20,8 +20,8 @@ Here are the steps for creating depth with simple ambient lighting:
 
 Here are the steps for making the blocks look not so out of place
 
-* Make a shader that darkens the texture the closer to the bottom
-* Add shadows also for the blocks
+* \[X] Make a shader that darkens the texture the closer to the bottom
+* \[ ] Add shadows also for the blocks
 
 
 
@@ -29,8 +29,9 @@ Here are the steps for making the blocks look not so out of place
 
 Here are the steps to make moving objects appear more included
 
-* Fix the transparency rendering for transparent shadows
-* Add shadows that adjust by height for all moving objects (use a shader)
+* \[ ] Fix the transparency rendering for transparent shadows
+* \[X] Add shadows that adjust by height for the ball objects (use a shader)
+* \[ ] Add shadows also for other moving objects
 
 
 
@@ -38,7 +39,7 @@ Here are the steps to make moving objects appear more included
 
 Here are the steps for finishing the looks
 
-* Create more interesting textures for checkpoints and goals using shaders
-* Add some VFX when the player falls to the water
-* Add some VFX when the player gets a checkpoint
+* \[ ] Create more interesting textures for checkpoints and goals using shaders
+* \[ ] Add some VFX when the player falls to the water
+* \[ ] Add some VFX when the player gets a checkpoint
 
