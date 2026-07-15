@@ -1,7 +1,7 @@
 name: "shadow"
-tags: "model"
-vertex_program: "/assets/materials/ball/shadow.vp"
-fragment_program: "/assets/materials/ball/shadow.fp"
+tags: "model_transparent"
+vertex_program: "/assets/materials/checkpoint/shadow.vp"
+fragment_program: "/assets/materials/checkpoint/shadow.fp"
 vertex_space: VERTEX_SPACE_LOCAL
 vertex_constants {
   name: "mtx_worldview"
@@ -25,7 +25,7 @@ fragment_constants {
   name: "base_tint"
   type: CONSTANT_TYPE_USER
   value {
-    w: 0.5
+    w: 0.25
   }
 }
 samplers {

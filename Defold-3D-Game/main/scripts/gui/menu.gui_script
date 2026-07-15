@@ -26,7 +26,7 @@ function on_input(self, action_id, action)
 	-- Checking for keyboard input for the play button
 	if action_id == hash("next") and action.pressed then
 		-- Loading level 1
-		msg.post("main:/collection_manager#loader", "load_level", { level_id = 1 })
+		msg.post("main:/collection_manager#loader", "load_level", { level_id = 6 })
 	end
 
 	-- Checking for keyboard input for the quit button

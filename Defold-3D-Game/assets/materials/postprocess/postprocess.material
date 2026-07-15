@@ -19,7 +19,7 @@ fragment_constants {
   name: "fog_params"
   type: CONSTANT_TYPE_USER
   value {
-    x: 0.015
+    x: 0.0125
     y: 150.0
     z: 495.0
     w: 1.0

@@ -19,6 +19,6 @@ void main()
     vec4 color = texture(tex0, var_texcoord0.xy) * base_tint_pm;
 
     // Applying ambient light
-    out_fragColor = vec4(color.rgb * ambient_light.xyz, 0.5);
+    out_fragColor = vec4(color.rgb * ambient_light.xyz, base_tint.w);
 }
 

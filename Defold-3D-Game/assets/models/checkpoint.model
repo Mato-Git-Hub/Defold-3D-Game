@@ -1,8 +1,8 @@
-mesh: "/assets/meshes/circle.glb"
+mesh: "/builtins/assets/gltf/cube.gltf"
 name: "unnamed"
 materials {
   name: "default"
-  material: "/assets/materials/checkpoint/shadow.material"
+  material: "/assets/materials/checkpoint/checkpoint.material"
   textures {
     sampler: "tex0"
     texture: "/assets/images/white_texture.png"

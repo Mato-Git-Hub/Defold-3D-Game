@@ -77,6 +77,15 @@ instances {
   id: "postprocess"
   prototype: "/main/prefabs/postprocess.go"
 }
+instances {
+  id: "checkpoint_shadow"
+  prototype: "/main/prefabs/checkpoint_shadow.go"
+  position {
+    x: -16.0
+    y: 2.01
+    z: -5.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "structures"
@@ -941,5 +950,6 @@ embedded_instances {
 embedded_instances {
   id: "checkpoints"
   children: "checkpoint"
+  children: "checkpoint_shadow"
   data: ""
 }

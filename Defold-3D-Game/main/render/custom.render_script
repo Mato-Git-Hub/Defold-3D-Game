@@ -212,7 +212,7 @@ local function update_postprocess_rt(self)
 end
 
 function init(self)
-    self.predicates = create_predicates("tile", "gui", "particle", "model", "skybox", "postprocess", "debug_text")
+    self.predicates = create_predicates("tile", "gui", "particle", "model", "model_transparent", "skybox", "postprocess", "debug_text")
 
     -- Creating postprocess render target
     create_postprocess_rt(self, render.get_window_width(), render.get_window_height())
@@ -293,6 +293,9 @@ function update(self)
     render.enable_state(graphics.STATE_BLEND)
     render.draw(predicates.tile, draw_options_world)
     render.draw(predicates.particle, draw_options_world)
+
+    -- render transparent models
+    render.draw(predicates.model_transparent, draw_options_world)
     render.disable_state(graphics.STATE_DEPTH_TEST)
 
     render.draw_debug3d()

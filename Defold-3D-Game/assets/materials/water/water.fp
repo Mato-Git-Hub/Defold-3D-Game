@@ -81,7 +81,7 @@ void main()
     // Getting texture color as base color
     vec4 base_color = texture(tex0, uv.xy);
     
-    // Using brownian motion to get the wave height:
+    // Using brownian motion to get the wave height
     float wave = fbm(uv);
 
     // Amplifying the noise

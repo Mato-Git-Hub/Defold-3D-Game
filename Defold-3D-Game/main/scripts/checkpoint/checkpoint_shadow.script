@@ -1,0 +1,23 @@
+-- Defining properties
+go.property("min_scale_distance", 5)
+go.property("min_scale", 0.1)
+go.property("max_scale", 1.5)
+go.property("parent_id", hash("/checkpoint"))
+
+function update(self, dt)
+	-- Raycasting for ground
+	local parent_pos = go.get_position(self.parent_id)
+	local raycast_result = physics.raycast(parent_pos, parent_pos - vmath.vector3(0, 10, 0), { hash("ground") })
+
+	-- Checkign if there was no result
+	if not raycast_result then return end
+
+	-- Getting the distance
+	local distance = vmath.length(raycast_result.position - parent_pos)
+
+	-- Lerping the scale
+	local shadow_scale = vmath.lerp(distance / self.min_scale_distance, self.max_scale, self.min_scale)
+
+	-- Setting the updated scale
+	go.set_scale(shadow_scale, ".")
+end

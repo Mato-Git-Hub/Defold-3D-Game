@@ -1,14 +1,14 @@
 components {
-  id: "cube"
-  component: "/assets/models/structure.model"
-}
-components {
   id: "checkpoint_animation"
   component: "/main/scripts/checkpoint/checkpoint_animation.script"
 }
 components {
   id: "checkpoint_spawnpoint_setting"
   component: "/main/scripts/checkpoint/checkpoint_spawnpoint_setting.script"
+}
+components {
+  id: "checkpoint"
+  component: "/assets/models/checkpoint.model"
 }
 embedded_components {
   id: "collisionobject"
