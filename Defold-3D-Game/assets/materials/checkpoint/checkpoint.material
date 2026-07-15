@@ -11,6 +11,10 @@ vertex_constants {
   name: "mtx_proj"
   type: CONSTANT_TYPE_PROJECTION
 }
+vertex_constants {
+  name: "mtx_world"
+  type: CONSTANT_TYPE_WORLD
+}
 fragment_constants {
   name: "ambient_light"
   type: CONSTANT_TYPE_USER
@@ -35,11 +39,33 @@ fragment_constants {
   name: "highlight_tint"
   type: CONSTANT_TYPE_USER
   value {
-    x: 0.886
+    x: 0.72
     y: 1.0
-    z: 0.835
+    z: 0.68
     w: 1.0
   }
+}
+fragment_constants {
+  name: "shade_params"
+  type: CONSTANT_TYPE_USER
+  value {
+    x: 0.65
+    y: 0.35
+    z: 0.7
+  }
+}
+fragment_constants {
+  name: "highlight_params"
+  type: CONSTANT_TYPE_USER
+  value {
+    x: 5.0
+    y: -3.0
+    z: 1.5
+  }
+}
+fragment_constants {
+  name: "time"
+  type: CONSTANT_TYPE_TIME
 }
 samplers {
   name: "tex0"

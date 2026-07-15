@@ -21,7 +21,7 @@ Here are the steps for creating depth with simple ambient lighting:
 Here are the steps for making the blocks look not so out of place
 
 * \[X] Make a shader that darkens the texture the closer to the bottom
-* \[ ] Add shadows also for the blocks
+* \[ ] Add shadows also for the blocks (?????)
 
 
 
@@ -29,9 +29,9 @@ Here are the steps for making the blocks look not so out of place
 
 Here are the steps to make moving objects appear more included
 
-* \[ ] Fix the transparency rendering for transparent shadows
+* \[X] Fix the transparency rendering for transparent shadows
 * \[X] Add shadows that adjust by height for the ball objects (use a shader)
-* \[ ] Add shadows also for other moving objects
+* \[X] Add shadows also for other moving objects
 
 
 
@@ -39,7 +39,8 @@ Here are the steps to make moving objects appear more included
 
 Here are the steps for finishing the looks
 
-* \[ ] Create more interesting textures for checkpoints and goals using shaders
+* \[X] Create more interesting textures for checkpoints using shaders
 * \[ ] Add some VFX when the player falls to the water
 * \[ ] Add some VFX when the player gets a checkpoint
+* \[ ] Get more interesting model and texture for goals using shaders
 

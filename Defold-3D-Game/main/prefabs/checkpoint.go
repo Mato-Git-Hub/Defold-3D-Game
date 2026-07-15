@@ -9,6 +9,12 @@ components {
 components {
   id: "checkpoint"
   component: "/assets/models/checkpoint.model"
+  rotation {
+    x: 0.35355338
+    y: 0.14644662
+    z: 0.35355338
+    w: 0.8535534
+  }
 }
 embedded_components {
   id: "collisionobject"
@@ -25,6 +31,10 @@ embedded_components {
   "    position {\n"
   "    }\n"
   "    rotation {\n"
+  "      x: 0.35355338\n"
+  "      y: 0.14644662\n"
+  "      z: 0.35355338\n"
+  "      w: 0.8535534\n"
   "    }\n"
   "    index: 0\n"
   "    count: 3\n"

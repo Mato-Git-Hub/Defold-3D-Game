@@ -10,8 +10,7 @@ in mediump vec2 texcoord0;
 
 out highp vec4 var_position;
 out mediump vec2 var_texcoord0;
-out highp vec4 var_top;
-out highp vec4 var_bottom;
+out highp vec4 var_pivot;
 out highp vec4 var_ball_pos;
 
 uniform vs_uniforms
@@ -32,8 +31,7 @@ void main()
     var_position = mtx_world * vec4(position.xyz, 1.0);
     
     // Calculating the variables that height calculations need
-    var_top = mtx_world * vec4(0.0, 0.5, 0.0, 1.0);
-    var_bottom = mtx_world * vec4(0.0, -0.5, 0.0, 1.0);
+    var_pivot = mtx_world[3];
 
     // Sending the ball position
     var_ball_pos = ball_pos;

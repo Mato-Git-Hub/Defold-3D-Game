@@ -2,8 +2,7 @@
 
 in highp vec4 var_position;
 in mediump vec2 var_texcoord0;
-in highp vec4 var_top;
-in highp vec4 var_bottom;
+in highp vec4 var_pivot;
 in highp vec4 var_ball_pos;
 
 out vec4 out_fragColor;
@@ -23,7 +22,7 @@ void main()
     vec4 base_color = texture(tex0, var_texcoord0.xy);
 
     // Calculating height for shade calculations
-    float height = (var_position.y - var_bottom.y) / (var_top.y - var_bottom.y);
+    float height = (var_position.y - var_pivot.y + shade_params.z) / (2 * shade_params.z);
     
     // Calculating the shade intensity
     float intensity = shade_params.x + height * shade_params.y;

@@ -2,8 +2,7 @@
 go.property("movement_amplitude", 1)
 go.property("movement_frequency", 0.25)
 
-go.property("rotation_frequency_x", 0.1)
-go.property("rotation_frequency_y", 0.1)
+go.property("rotation_frequency", 0.1)
 
 -- Function to update movement
 local function update_movement(self, dt)
@@ -20,15 +19,13 @@ end
 -- Function to update rotation
 local function update_rotation(self, dt)
 	-- Updating rotation times
-	self.rotation_time_x = (self.rotation_time_x + dt) % self.rotation_period_x
-	self.rotation_time_y = (self.rotation_time_y + dt) % self.rotation_period_y
+	self.rotation_time = (self.rotation_time + dt) % self.rotation_period
 
 	-- Updating the rotations offsets
-	self.rotation_offset_x = vmath.quat_rotation_x(2 * math.pi * math.sin(self.rotation_time_x * self.rotation_frequency_x))
-	self.rotation_offset_y = vmath.quat_rotation_y(2 * math.pi * math.sin(self.rotation_time_y * self.rotation_frequency_y))
+	self.rotation_offset = vmath.quat_rotation_y(2 * math.pi * math.sin(self.rotation_time * self.rotation_frequency))
 
 	-- Setting rotation
-	go.set_rotation(self.original_rotation * self.rotation_offset_x * self.rotation_offset_y, ".")
+	go.set_rotation(self.original_rotation * self.rotation_offset, ".")
 end
 
 function init(self)
@@ -38,19 +35,15 @@ function init(self)
 	self.movement_frequency = 2 * math.pi * self.movement_frequency
 
 	self.original_rotation = go.get_rotation(".")
-	self.rotation_period_x = 1 / self.rotation_frequency_x
-	self.rotation_period_y = 1 / self.rotation_frequency_y
-	self.rotation_frequency_x = 2 * math.pi * self.rotation_frequency_x
-	self.rotation_frequency_y = 2 * math.pi * self.rotation_frequency_y
+	self.rotation_period = 1 / self.rotation_frequency
+	self.rotation_frequency = 2 * math.pi * self.rotation_frequency
 	
 	-- Defining state variables
 	self.position_offset = vmath.vector3()
 	self.movement_time = math.random(1000) % self.movement_period
 
-	self.rotation_offset_x = vmath.quat()
-	self.rotation_offset_y = vmath.quat()
-	self.rotation_time_x = math.random(1000) % self.rotation_period_x
-	self.rotation_time_y = math.random(1000) % self.rotation_period_y
+	self.rotation_offset = vmath.quat()
+	self.rotation_time = math.random(1000) % self.rotation_period
 end
 
 function update(self, dt)
