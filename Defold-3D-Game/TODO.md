@@ -42,5 +42,6 @@ Here are the steps for finishing the looks
 * \[X] Create more interesting textures for checkpoints using shaders
 * \[X] Add some VFX when the player falls to the water
 * \[X] Add some VFX when the player gets a checkpoint
-* \[ ] Get more interesting model and texture for goals using shaders
+* \[X] Get more interesting model and texture for goals using shaders
+* \[X] Add some VFX when the player reaches the goal
 

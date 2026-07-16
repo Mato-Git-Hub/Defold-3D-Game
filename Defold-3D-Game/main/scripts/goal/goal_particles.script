@@ -1,0 +1,12 @@
+function init(self)
+	-- Starting the idle particles
+	particlefx.play("#goal_idle")
+end
+
+function on_message(self, message_id, message, sender)
+	-- Checking for level completed message
+	if message_id == hash("level_completed") then
+		-- Playing the finish particles
+		particlefx.play("#goal_finish")
+	end
+end

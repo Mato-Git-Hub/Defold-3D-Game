@@ -1,0 +1,76 @@
+name: "model"
+tags: "model"
+vertex_program: "/assets/materials/goal/goal.vp"
+fragment_program: "/assets/materials/goal/goal.fp"
+vertex_space: VERTEX_SPACE_LOCAL
+vertex_constants {
+  name: "mtx_worldview"
+  type: CONSTANT_TYPE_WORLDVIEW
+}
+vertex_constants {
+  name: "mtx_proj"
+  type: CONSTANT_TYPE_PROJECTION
+}
+vertex_constants {
+  name: "mtx_world"
+  type: CONSTANT_TYPE_WORLD
+}
+fragment_constants {
+  name: "ambient_light"
+  type: CONSTANT_TYPE_USER
+  value {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+}
+fragment_constants {
+  name: "base_tint"
+  type: CONSTANT_TYPE_USER
+  value {
+    x: 1.0
+    y: 0.76
+    z: 0.2
+    w: 1.0
+  }
+}
+fragment_constants {
+  name: "highlight_tint"
+  type: CONSTANT_TYPE_USER
+  value {
+    x: 1.0
+    y: 0.94
+    z: 0.65
+    w: 1.0
+  }
+}
+fragment_constants {
+  name: "shade_params"
+  type: CONSTANT_TYPE_USER
+  value {
+    x: 0.65
+    y: 0.35
+    z: 0.7
+  }
+}
+fragment_constants {
+  name: "highlight_params"
+  type: CONSTANT_TYPE_USER
+  value {
+    x: 3.0
+    y: -1.5
+    z: 2.0
+  }
+}
+fragment_constants {
+  name: "time"
+  type: CONSTANT_TYPE_TIME
+}
+samplers {
+  name: "tex0"
+  wrap_u: WRAP_MODE_CLAMP_TO_EDGE
+  wrap_v: WRAP_MODE_CLAMP_TO_EDGE
+  filter_min: FILTER_MODE_MIN_LINEAR
+  filter_mag: FILTER_MODE_MAG_LINEAR
+}

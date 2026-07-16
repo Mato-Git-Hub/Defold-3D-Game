@@ -1,0 +1,10 @@
+mesh: "/assets/meshes/gem.glb"
+name: "goal"
+materials {
+  name: "default"
+  material: "/assets/materials/goal/goal.material"
+  textures {
+    sampler: "tex0"
+    texture: "/assets/images/white_texture.png"
+  }
+}

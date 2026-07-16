@@ -4,10 +4,11 @@ go.property("next_level", 0)
 function on_message(self, message_id, message, sender)
 	-- Checking for collision with the ball
 	if message_id == hash("trigger_response") and message.enter and message.other_id == hash(go.get("/ball_spawner#ball_spawner", "ball_id")) then
-		-- Sending level complete message to the ui and to the camera
+		-- Sending level complete message to the ui, the camera and the particle system
 		msg.post("/level_complete_ui#level_complete_gui", "level_completed")
 		msg.post("/camera#camera_level_completed_animation", "level_completed")
 		msg.post("/camera#camera_controller", "level_completed")
+		msg.post("#goal_particles", "level_completed")
 
 		-- Stopping the ball
 		msg.post(go.get("/ball_spawner#ball_spawner", "collisionobject_id"), "disable")

@@ -14,11 +14,11 @@ function on_message(self, message_id, message, sender)
 		direction.y = 0
 
 		-- Making sure the vector can be normalized
-		if vmath.length(direction)  ~= 0 then
+		if vmath.length(direction) ~= 0 then
 			-- Normalizing the vector
 			direction = vmath.normalize(direction)
 
-			-- Making sure rotation the vector wont return an error
+			-- Making sure rotating the vector won't return an error
 			if direction.z ~= 1 then
 				-- Updating particle rotation
 				local particle_rotation = vmath.quat_from_to(vmath.vector3(0, 0, -1), direction)

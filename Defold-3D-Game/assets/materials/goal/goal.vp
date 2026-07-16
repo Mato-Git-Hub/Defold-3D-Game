@@ -1,0 +1,37 @@
+#version 140
+
+// Positions can be world or local space, since world and normal
+// matrices are identity for world vertex space materials.
+// If world vertex space is selected, you can remove the
+// normal matrix multiplication for optimal performance.
+
+in highp vec4 position;
+in mediump vec2 texcoord0;
+
+out highp vec4 var_position;
+out mediump vec2 var_texcoord0;
+out highp vec4 var_pivot;
+
+uniform vs_uniforms
+{
+    mediump mat4 mtx_worldview;
+    mediump mat4 mtx_proj;
+    mediump mat4 mtx_world;
+};
+
+void main()
+{
+    // Sending the uv coordinates to fragment shader
+    var_texcoord0 = texcoord0;
+
+    // Calculating the point in the world
+    vec4 p = mtx_worldview * vec4(position.xyz, 1.0);
+    var_position = mtx_world * vec4(position.xyz, 1.0);
+
+    // Calculating the variables that height calculations need
+    var_pivot = mtx_world[3];
+
+    // Returning the position
+    gl_Position = mtx_proj * p;
+}
+

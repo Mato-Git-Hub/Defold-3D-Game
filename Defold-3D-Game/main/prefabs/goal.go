@@ -1,20 +1,51 @@
 components {
-  id: "cube"
-  component: "/assets/models/structure.model"
+  id: "level_completion_tracker"
+  component: "/main/scripts/goal/level_completion_tracker.script"
+}
+components {
+  id: "goal"
+  component: "/assets/models/goal.model"
+  position {
+    x: 0.1
+    y: 1.0
+  }
+}
+components {
+  id: "checkpoint_animation"
+  component: "/main/scripts/checkpoint/checkpoint_animation.script"
+  properties {
+    id: "movement_amplitude"
+    value: "0.5"
+    type: PROPERTY_TYPE_NUMBER
+  }
+  properties {
+    id: "movement_frequency"
+    value: "0.2"
+    type: PROPERTY_TYPE_NUMBER
+  }
+  properties {
+    id: "rotation_frequency"
+    value: "0.05"
+    type: PROPERTY_TYPE_NUMBER
+  }
+}
+components {
+  id: "goal_idle"
+  component: "/assets/particles/goal_idle.particlefx"
+  position {
+    y: 0.75
+  }
+}
+components {
+  id: "goal_particles"
+  component: "/main/scripts/goal/goal_particles.script"
+}
+components {
+  id: "goal_finish"
+  component: "/assets/particles/goal_finish.particlefx"
   position {
     y: 0.5
   }
-}
-components {
-  id: "cube1"
-  component: "/assets/models/structure.model"
-  position {
-    y: 1.5
-  }
-}
-components {
-  id: "level_completion_tracker"
-  component: "/main/scripts/goal/level_completion_tracker.script"
 }
 embedded_components {
   id: "collisionobject"
