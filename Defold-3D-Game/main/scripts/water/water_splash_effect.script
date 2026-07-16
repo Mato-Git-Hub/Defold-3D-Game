@@ -14,12 +14,17 @@ function on_message(self, message_id, message, sender)
 		direction.y = 0
 
 		-- Making sure the vector can be normalized
-		if vmath.length(direction) == 0 then return end
-		direction = vmath.normalize(direction)
+		if vmath.length(direction)  ~= 0 then
+			-- Normalizing the vector
+			direction = vmath.normalize(direction)
 
-		-- Updating particle rotation
-		local particle_rotation = vmath.quat_from_to(vmath.vector3(0, 0, -1), direction)
-		go.set_rotation(particle_rotation, "/water_splash")
+			-- Making sure rotation the vector wont return an error
+			if direction.z ~= 1 then
+				-- Updating particle rotation
+				local particle_rotation = vmath.quat_from_to(vmath.vector3(0, 0, -1), direction)
+				go.set_rotation(particle_rotation, "/water_splash")
+			end
+		end
 
 		-- Playing the particles
 		particlefx.play("/water_splash#water_splash")
