@@ -212,7 +212,7 @@ local function update_postprocess_rt(self)
 end
 
 function init(self)
-    self.predicates = create_predicates("tile", "gui", "particle", "model", "model_transparent", "skybox", "postprocess", "debug_text")
+    self.predicates = create_predicates("tile", "gui", "particle", "particle_no_postprocess", "model", "model_transparent", "skybox", "postprocess", "debug_text")
 
     -- Creating postprocess render target
     create_postprocess_rt(self, render.get_window_width(), render.get_window_height())
@@ -314,6 +314,12 @@ function update(self)
     render.disable_texture(1)
     render.disable_texture(0)
 
+    -- render particles without postprocess
+    local draw_options_post_world = set_camera_world(state)
+
+    render.draw(predicates.particle_no_postprocess, draw_options_post_world)
+    reset_camera_world(state)
+    
     -- render GUI
     --
     local camera_gui = state.cameras.camera_gui

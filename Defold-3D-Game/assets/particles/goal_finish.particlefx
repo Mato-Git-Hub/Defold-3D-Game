@@ -5,7 +5,7 @@ emitters {
   space: EMISSION_SPACE_WORLD
   tile_source: "/builtins/graphics/particle_blob.tilesource"
   animation: "anim"
-  material: "/builtins/materials/particlefx.material"
+  material: "/assets/materials/particles/particlefx_no_postprocess.material"
   blend_mode: BLEND_MODE_ADD
   max_particle_count: 500
   type: EMITTER_TYPE_CONE
@@ -54,19 +54,19 @@ emitters {
   properties {
     key: EMITTER_KEY_PARTICLE_RED
     points {
-      y: 1.0
+      y: 0.35
     }
   }
   properties {
     key: EMITTER_KEY_PARTICLE_GREEN
     points {
-      y: 0.76
+      y: 0.27
     }
   }
   properties {
     key: EMITTER_KEY_PARTICLE_BLUE
     points {
-      y: 0.2
+      y: 0.07
     }
   }
   properties {
@@ -92,33 +92,17 @@ emitters {
       t_x: 0.9973835
       t_y: -0.0722925
     }
-    points {
-      x: 1.0
-      y: 1.658622
-      t_x: 0.5497874
-      t_y: 0.8353046
-    }
   }
   particle_properties {
     key: PARTICLE_KEY_GREEN
     points {
       y: 1.0
     }
-    points {
-      x: 1.0
-      y: 1.509955
-    }
   }
   particle_properties {
     key: PARTICLE_KEY_BLUE
     points {
-      y: 0.884577
-      t_x: 0.5886341
-      t_y: 0.8083996
-    }
-    points {
-      x: 1.0
-      y: 1.552378
+      y: 1.0
     }
   }
   particle_properties {
@@ -170,7 +154,7 @@ emitters {
   space: EMISSION_SPACE_WORLD
   tile_source: "/builtins/graphics/particle_blob.tilesource"
   animation: "anim"
-  material: "/builtins/materials/particlefx.material"
+  material: "/assets/materials/particles/particlefx_no_postprocess.material"
   blend_mode: BLEND_MODE_ADD
   max_particle_count: 500
   type: EMITTER_TYPE_CONE
@@ -219,19 +203,19 @@ emitters {
   properties {
     key: EMITTER_KEY_PARTICLE_RED
     points {
-      y: 1.0
+      y: 0.35
     }
   }
   properties {
     key: EMITTER_KEY_PARTICLE_GREEN
     points {
-      y: 0.94
+      y: 0.33
     }
   }
   properties {
     key: EMITTER_KEY_PARTICLE_BLUE
     points {
-      y: 0.65
+      y: 0.23
     }
   }
   properties {
@@ -257,33 +241,17 @@ emitters {
       t_x: 0.9973835
       t_y: -0.0722925
     }
-    points {
-      x: 1.0
-      y: 1.658622
-      t_x: 0.5497874
-      t_y: 0.8353046
-    }
   }
   particle_properties {
     key: PARTICLE_KEY_GREEN
     points {
       y: 1.0
     }
-    points {
-      x: 1.0
-      y: 1.509955
-    }
   }
   particle_properties {
     key: PARTICLE_KEY_BLUE
     points {
-      y: 0.884577
-      t_x: 0.5886341
-      t_y: 0.8083996
-    }
-    points {
-      x: 1.0
-      y: 1.552378
+      y: 1.0
     }
   }
   particle_properties {
