@@ -1,5 +1,8 @@
 -- Defining properties
 go.property("torque_force", 5)
+go.property("dash_force", 35)
+go.property("dash_duration", 0.25)
+go.property("dash_cooldown", 5)
 
 -- Function to update target velocity direction
 local function update_force_direction(self)
@@ -32,6 +35,23 @@ local function update_force_direction(self)
 	self.force_direction = vmath.rotate(camera_rotation, direction)
 end
 
+-- Function to handle dashing
+local function handle_dash(self)
+	-- Checking if dash is on cooldown
+	if socket.gettime() > self.dash_used + self.dash_duration then return end
+
+	-- Getting currect velocity in the xz plane
+	local current_velocity = go.get("#collisionobject", "linear_velocity")
+	current_velocity.y = 0
+
+	-- Checking if the ball is moving and normalizing the velocity
+	if vmath.length(current_velocity) < 0.001 then return end
+	current_velocity = vmath.normalize(current_velocity)
+
+	-- Applying a force in the direction of the current velocity
+	msg.post("#collisionobject", "apply_force", { force = current_velocity * self.dash_force, position = go.get_position(".") })
+end
+
 function init(self)
 	-- Acquiring input focus
 	msg.post(".", "acquire_input_focus")
@@ -47,6 +67,7 @@ function init(self)
 		right = false
 	}
 	self.force_direction = vmath.vector3()
+	self.dash_used = -self.dash_cooldown;
 end
 
 function update(self, dt)
@@ -61,6 +82,9 @@ function update(self, dt)
 		-- Applying the force
 		msg.post("#collisionobject", "apply_force", { force = self.force_direction * self.torque_force, position = force_position })
 	end
+
+	-- Handling dash
+	handle_dash(self)
 end
 
 function on_message(self, message_id, message, sender)
@@ -98,5 +122,8 @@ function on_input(self, action_id, action)
 		elseif action.released then
 			self.inputs.right = false
 		end
+	elseif action_id == hash("next") and action.pressed and socket.gettime() >= self.dash_used + self.dash_cooldown then
+		-- Updating dash used timee
+		self.dash_used = socket.gettime()
 	end
 end
