@@ -1,5 +1,6 @@
 -- Defining properties
 go.property("start_pos", vmath.vector3(0, 0, 0))
+go.property("respawn_delay", 1)
 
 -- Defining state variables that need to be accessed by other scripts
 go.property("ball_id", 0)
@@ -18,12 +19,18 @@ end
 function on_message(self, message_id, message, sender)
 	-- Checking for death message
 	if message_id == hash("ball_died") then
+		-- Telling the water that the ball fell
+		msg.post("/map_bottom#water_splash_effect", "ball_died", { pos = go.get_position(self.ball_id) })
+
 		-- Destroying the previous ball
 		go.delete(self.ball_id)
 
-		-- Creating a new ball and saving the id
-		self.ball_id = factory.create("#ball_factory", self.spawn_point)
-		self.collisionobject_id = msg.url(nil, self.ball_id, "collisionobject")
+		-- Setting a delay to spawn the ball
+		timer.delay(self.respawn_delay, false, function()
+			-- Creating a new ball and saving the id
+			self.ball_id = factory.create("#ball_factory", self.spawn_point)
+			self.collisionobject_id = msg.url(nil, self.ball_id, "collisionobject")
+		end)
 	end
 	
 	-- Checking for checkpoint collision
@@ -34,6 +41,9 @@ function on_message(self, message_id, message, sender)
 			-- Updating checkpoint info
 			self.current_checkpoint_priority = message.priority
 			self.spawn_point = message.position
+
+			-- Sending message about the checkpoint being accepted
+			msg.post(sender,"spawn_point_set")
 		end
 	end
 end

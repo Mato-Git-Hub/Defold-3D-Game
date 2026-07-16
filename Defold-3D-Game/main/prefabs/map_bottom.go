@@ -8,7 +8,11 @@ components {
 }
 components {
   id: "death_object"
-  component: "/main/scripts/obstacles/death_object.script"
+  component: "/main/scripts/water/death_object.script"
+}
+components {
+  id: "water_splash_effect"
+  component: "/main/scripts/water/water_splash_effect.script"
 }
 embedded_components {
   id: "collisionobject"

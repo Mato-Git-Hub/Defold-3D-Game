@@ -16,6 +16,10 @@ components {
     w: 0.8535534
   }
 }
+components {
+  id: "checkpoint_particles"
+  component: "/assets/particles/checkpoint_particles.particlefx"
+}
 embedded_components {
   id: "collisionobject"
   type: "collisionobject"

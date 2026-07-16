@@ -40,7 +40,7 @@ Here are the steps to make moving objects appear more included
 Here are the steps for finishing the looks
 
 * \[X] Create more interesting textures for checkpoints using shaders
-* \[ ] Add some VFX when the player falls to the water
-* \[ ] Add some VFX when the player gets a checkpoint
+* \[X] Add some VFX when the player falls to the water
+* \[X] Add some VFX when the player gets a checkpoint
 * \[ ] Get more interesting model and texture for goals using shaders
 

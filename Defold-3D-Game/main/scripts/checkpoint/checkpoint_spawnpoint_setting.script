@@ -16,4 +16,10 @@ function on_message(self, message_id, message, sender)
 		}
 		msg.post("/ball_spawner#ball_spawner", "ball_checkpoint", checkpoint_message)
 	end
+
+	-- Checking if the checkpoint was accepted
+	if message_id == hash("spawn_point_set") then
+		-- Playing a particle effect
+		particlefx.play("#checkpoint_particles")
+	end
 end
