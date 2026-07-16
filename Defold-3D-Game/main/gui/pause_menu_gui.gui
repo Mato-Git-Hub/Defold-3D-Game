@@ -1,0 +1,165 @@
+script: "/main/scripts/gui/pause_menu.gui_script"
+fonts {
+  name: "outline"
+  font: "/assets/fonts/outline.font"
+}
+fonts {
+  name: "default"
+  font: "/builtins/fonts/default.font"
+}
+nodes {
+  position {
+    x: 480.0
+    y: 450.0
+  }
+  scale {
+    x: 5.0
+    y: 5.0
+    z: 5.0
+  }
+  size {
+    x: 125.0
+    y: 25.0
+  }
+  type: TYPE_TEXT
+  text: "Game paused"
+  font: "outline"
+  id: "game_paused_text"
+  layer: "menu"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 325.0
+    y: 225.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_BOX
+  id: "continue_button"
+  layer: "menu"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 190.0
+    y: 90.0
+  }
+  type: TYPE_BOX
+  id: "continue_button_base"
+  parent: "continue_button"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  scale {
+    x: 3.5
+    y: 3.5
+    z: 3.5
+  }
+  size {
+    x: 50.0
+    y: 25.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Return"
+  font: "default"
+  id: "continue_text"
+  parent: "continue_button_base"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 635.0
+    y: 225.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_BOX
+  id: "menu_button"
+  layer: "menu"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 190.0
+    y: 90.0
+  }
+  type: TYPE_BOX
+  id: "menu_button_base"
+  parent: "menu_button"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  scale {
+    x: 3.5
+    y: 3.5
+    z: 3.5
+  }
+  size {
+    x: 50.0
+    y: 25.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Menu"
+  font: "default"
+  id: "menu_text"
+  parent: "menu_button_base"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 480.0
+    y: 320.0
+  }
+  size {
+    x: 960.0
+    y: 640.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_BOX
+  id: "background"
+  layer: "background"
+  inherit_alpha: true
+  alpha: 0.25
+  size_mode: SIZE_MODE_AUTO
+}
+layers {
+  name: "background"
+}
+layers {
+  name: "menu"
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

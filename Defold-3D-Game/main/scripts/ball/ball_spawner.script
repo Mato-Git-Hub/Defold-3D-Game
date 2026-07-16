@@ -1,3 +1,6 @@
+-- Requiring modules
+local go_help = require "main.modules.go_help"
+
 -- Defining properties
 go.property("start_pos", vmath.vector3(0, 0, 0))
 go.property("respawn_delay", 1)
@@ -10,6 +13,9 @@ function init(self)
 	-- Defining state variables
 	self.spawn_point = self.start_pos
 	self.current_checkpoint_priority = 0
+	self.ball_linear_velocity = vmath.vector3(0, 0, 0)
+	self.ball_angular_velocity = vmath.vector3(0, 0, 0)
+	self.paused = false
 
 	-- Creating the first ball
 	self.ball_id = factory.create("#ball_factory", self.spawn_point)
@@ -30,6 +36,12 @@ function on_message(self, message_id, message, sender)
 			-- Creating a new ball and saving the id
 			self.ball_id = factory.create("#ball_factory", self.spawn_point)
 			self.collisionobject_id = msg.url(nil, self.ball_id, "collisionobject")
+
+			-- Checking if the game is paused
+			if self.paused then
+				-- Disabling the collision obejct
+				msg.post(self.collisionobject_id, "disable")
+			end
 		end)
 	end
 	
@@ -45,5 +57,38 @@ function on_message(self, message_id, message, sender)
 			-- Sending message about the checkpoint being accepted
 			msg.post(sender,"spawn_point_set")
 		end
+	end
+
+	-- Checking for pausing related messages
+	if message_id == hash("game_paused") then
+		-- Checking if a ball exists
+		if go_help.exists(self.ball_id) then
+			-- Saving the linear and angular velocity of the ball
+			self.ball_linear_velocity = go.get(self.collisionobject_id, "linear_velocity")
+			self.ball_angular_velocity = go.get(self.collisionobject_id, "angular_velocity") 
+			
+			-- Stopping the ball
+			msg.post(self.collisionobject_id, "disable")
+		else
+			-- Resetting ball's velocity
+			self.ball_linear_velocity = vmath.vector3(0, 0, 0)
+			self.ball_angular_velocity = vmath.vector3(0, 0, 0)
+		end
+
+		-- Updating paused status
+		self.paused = true
+	elseif message_id == hash("game_unpaused") then
+		-- Checking if a ball exists
+		if go_help.exists(self.ball_id) then
+			-- Allowing the ball to move
+			msg.post(self.collisionobject_id, "enable")
+
+			-- Setting the precious velocity
+			go.set(self.collisionobject_id, "linear_velocity", self.ball_linear_velocity)
+			go.set(self.collisionobject_id, "angular_velocity", self.ball_angular_velocity)
+		end
+
+		-- Updating paused status
+		self.paused = false
 	end
 end

@@ -84,6 +84,14 @@ instances {
     }
   }
 }
+instances {
+  id: "in_game_ui"
+  prototype: "/main/prefabs/in_game_ui.go"
+}
+instances {
+  id: "pause_ui"
+  prototype: "/main/prefabs/pause_ui.go"
+}
 scale_along_z: 0
 embedded_instances {
   id: "structures"

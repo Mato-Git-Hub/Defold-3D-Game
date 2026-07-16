@@ -1,0 +1,79 @@
+script: "/main/scripts/gui/in_game_ui.gui_script"
+fonts {
+  name: "outline"
+  font: "/assets/fonts/outline.font"
+}
+fonts {
+  name: "default"
+  font: "/builtins/fonts/default.font"
+}
+nodes {
+  position {
+    x: 50.0
+    y: 590.0
+  }
+  size {
+    x: 75.0
+    y: 75.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_BOX
+  id: "pause_button"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 65.0
+    y: 65.0
+  }
+  type: TYPE_BOX
+  id: "pause_button_base"
+  parent: "pause_button"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: -10.0
+  }
+  size {
+    x: 10.0
+    y: 40.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_BOX
+  id: "bar_1"
+  parent: "pause_button_base"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 10.0
+  }
+  size {
+    x: 10.0
+    y: 40.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_BOX
+  id: "bar_2"
+  parent: "pause_button_base"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
