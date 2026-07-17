@@ -67,7 +67,10 @@ function init(self)
 		right = false
 	}
 	self.force_direction = vmath.vector3()
-	self.dash_used = -self.dash_cooldown;
+	self.dash_used = 0;
+
+	-- Informing UI about dash being ready
+	msg.post("/in_game_ui#in_game_gui", "dash_used", { dash_used = 0, dash_cooldown = 1 })
 end
 
 function update(self, dt)
@@ -123,7 +126,16 @@ function on_input(self, action_id, action)
 			self.inputs.right = false
 		end
 	elseif action_id == hash("next") and action.pressed and socket.gettime() >= self.dash_used + self.dash_cooldown then
-		-- Updating dash used timee
+		-- Making sure the ball is moving
+		if vmath.length(go.get("#collisionobject", "linear_velocity")) < 0.001 then return end
+		
+		-- Updating dash used time
 		self.dash_used = socket.gettime()
+
+		-- Playing dash particles to show that dash was activated
+		particlefx.play("#dash_particles")
+
+		-- Informing UI about the activation of the dash
+		msg.post("/in_game_ui#in_game_gui", "dash_used", { dash_used = self.dash_used, dash_cooldown = self.dash_cooldown })
 	end
 end

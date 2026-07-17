@@ -75,5 +75,66 @@ nodes {
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
+nodes {
+  position {
+    x: 910.0
+    y: 125.0
+  }
+  size {
+    x: 50.0
+    y: 200.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_BOX
+  id: "dash_cooldown_bar"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 40.0
+    y: 190.0
+  }
+  type: TYPE_BOX
+  id: "dash_cooldown_bar_base"
+  parent: "dash_cooldown_bar"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 30.0
+    y: 180.0
+  }
+  color {
+    x: 0.8
+    y: 0.8
+    z: 0.8
+  }
+  type: TYPE_BOX
+  id: "bar_base"
+  parent: "dash_cooldown_bar_base"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 30.0
+    y: 180.0
+  }
+  color {
+    x: 0.0
+    z: 0.0
+  }
+  type: TYPE_BOX
+  id: "bar"
+  parent: "bar_base"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

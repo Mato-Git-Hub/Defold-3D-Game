@@ -10,6 +10,10 @@ components {
   id: "ball_shadow"
   component: "/main/scripts/ball/ball_shadow.script"
 }
+components {
+  id: "dash_particles"
+  component: "/assets/particles/dash_particles.particlefx"
+}
 embedded_components {
   id: "collisionobject"
   type: "collisionobject"

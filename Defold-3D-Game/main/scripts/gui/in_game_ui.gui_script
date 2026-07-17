@@ -2,8 +2,41 @@ function init(self)
 	-- Acquiring input focus
 	msg.post(".", "acquire_input_focus")
 
+	-- Defining constants
+	self.dash_bar = gui.get_node(hash("bar"))
+	self.dash_bar_size = gui.get_size(self.dash_bar)
+	self.full_pos = gui.get_position(self.dash_bar)
+	self.empty_pos = gui.get_position(self.dash_bar)
+	self.empty_pos.y = self.empty_pos.y - self.dash_bar_size.y / 2
+
+	print("Empty:", self.empty_pos.y, "Full:", self.full_pos.y)
+
 	-- Defining state variables
 	self.paused = false
+	self.dash_used = 0
+	self.dash_cooldown = 1
+end
+
+function update(self, dt)
+	-- Calculating the dash meter based of dash use time and cooldown
+	local t = 1 - (self.dash_used + self.dash_cooldown - socket.gettime()) / self.dash_cooldown
+	t = vmath.clamp(t, 0, 1)
+
+	-- Interpolating the position of the bar
+	local bar_pos = vmath.vector3(self.full_pos.x, vmath.lerp(t, self.empty_pos.y, self.full_pos.y), self.full_pos.z)
+
+	-- Updating the size and position
+	gui.set_scale(self.dash_bar, vmath.vector3(1, t, 1))
+	gui.set_position(self.dash_bar, bar_pos)
+end
+
+function on_message(self, message_id, message, sender)
+	-- Checking for dash used message
+	if message_id == hash("dash_used") then
+		-- Updating dash used time and dash cooldown
+		self.dash_used = message.dash_used
+		self.dash_cooldown = message.dash_cooldown
+	end
 end
 
 function on_input(self, action_id, action)
