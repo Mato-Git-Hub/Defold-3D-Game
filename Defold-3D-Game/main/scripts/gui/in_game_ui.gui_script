@@ -30,8 +30,6 @@ function init(self)
 	self.empty_pos.y = self.empty_pos.y - self.dash_bar_size.y / 2
 	self.start_time = socket.gettime()
 
-	print("Empty:", self.empty_pos.y, "Full:", self.full_pos.y)
-
 	-- Defining state variables
 	self.paused = false
 	self.level_completed = false

@@ -2,7 +2,22 @@ function init(self)
 	-- Acquiring input focus so that loaded collections can handle input
 	msg.post(".", "acquire_input_focus")
 
+	-- Defining constants
+	self.levels = {
+		[hash("level_1")] = 1,
+		[hash("level_2")] = 2,
+		[hash("level_3")] = 3,
+		[hash("level_4")] = 4,
+		[hash("level_5")] = 5,
+		[hash("level_6")] = 6,
+		[hash("level_7")] = 7,
+		[hash("level_8")] = 8,
+		[hash("level_9")] = 9,
+		[hash("level_10")] = 10
+	}
+
 	-- Defining state variables
+	self.level_id = 0
 	self.proxy_url = "#level_0"
 
 	-- Loading the main menu
@@ -18,10 +33,17 @@ function on_message(self, message_id, message, sender)
 		msg.post(self.proxy_url, "unload")
 
 		-- Updating the proxy url
+		self.level_id = message.level_id
 		self.proxy_url = "#level_" .. message.level_id
 
 		-- Loading new level
 		msg.post(self.proxy_url, "load")
+	end
+
+	-- Listening for restart request
+	if message_id == hash("restart_level") then
+		-- Loading the current level
+		msg.post("#", "load_level", { level_id = self.level_id })
 	end
 
 	-- Listening for level loaded
@@ -29,5 +51,22 @@ function on_message(self, message_id, message, sender)
 		-- Enabling the level
 		msg.post(sender, "init")
 		msg.post(sender, "enable")
+	end
+end
+
+function on_input(self, action_id, action)
+	-- Checking for level restart
+	if action_id == hash("restart") and action.pressed and self.level_id ~= 0 then
+		msg.post("#", "restart_level")
+	end
+
+	-- Checking for level selection
+	if action.pressed and self.level_id == 0 then
+		-- Attempting to load a level
+		local target_level = self.levels[action_id]
+		if target_level then
+			-- Loading the level
+			msg.post("#", "load_level", { level_id = target_level })
+		end
 	end
 end

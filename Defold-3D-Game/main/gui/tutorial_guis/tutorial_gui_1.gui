@@ -1,0 +1,28 @@
+script: "/main/scripts/gui/tutorial.gui_script"
+fonts {
+  name: "outline"
+  font: "/assets/fonts/outline.font"
+}
+nodes {
+  position {
+    x: 250.0
+    y: 65.0
+  }
+  scale {
+    x: 1.5
+    y: 1.5
+    z: 1.5
+  }
+  size {
+    x: 300.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "Use WASD or arrow keys to move\n"
+  "The camera will follow your velocity"
+  font: "outline"
+  id: "text"
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

@@ -1,3 +1,6 @@
+-- Requiring modules
+local go_help = require "main.modules.go_help"
+
 -- Defining properties
 go.property("torque_force", 5)
 go.property("dash_force", 35)
@@ -136,6 +139,7 @@ function on_input(self, action_id, action)
 		particlefx.play("#dash_particles")
 
 		-- Informing UI about the activation of the dash
+		if not go_help.exists("/in_game_ui") then return end
 		msg.post("/in_game_ui#in_game_gui", "dash_used", { dash_used = self.dash_used, dash_cooldown = self.dash_cooldown })
 	end
 end

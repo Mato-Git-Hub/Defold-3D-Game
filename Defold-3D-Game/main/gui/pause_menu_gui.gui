@@ -30,7 +30,7 @@ nodes {
 }
 nodes {
   position {
-    x: 325.0
+    x: 225.0
     y: 225.0
   }
   size {
@@ -61,9 +61,9 @@ nodes {
 }
 nodes {
   scale {
-    x: 3.5
-    y: 3.5
-    z: 3.5
+    x: 3.0
+    y: 3.0
+    z: 3.0
   }
   size {
     x: 50.0
@@ -83,7 +83,7 @@ nodes {
 }
 nodes {
   position {
-    x: 635.0
+    x: 735.0
     y: 225.0
   }
   size {
@@ -114,9 +114,9 @@ nodes {
 }
 nodes {
   scale {
-    x: 3.5
-    y: 3.5
-    z: 3.5
+    x: 3.0
+    y: 3.0
+    z: 3.0
   }
   size {
     x: 50.0
@@ -154,6 +154,59 @@ nodes {
   inherit_alpha: true
   alpha: 0.25
   size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 480.0
+    y: 225.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_BOX
+  id: "restart_button"
+  layer: "menu"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 190.0
+    y: 90.0
+  }
+  type: TYPE_BOX
+  id: "restart_button_base"
+  parent: "restart_button"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  scale {
+    x: 3.0
+    y: 3.0
+    z: 3.0
+  }
+  size {
+    x: 50.0
+    y: 25.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Restart"
+  font: "default"
+  id: "restart_text"
+  parent: "restart_button_base"
+  inherit_alpha: true
 }
 layers {
   name: "background"

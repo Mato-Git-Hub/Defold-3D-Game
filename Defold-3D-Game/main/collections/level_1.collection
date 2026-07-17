@@ -391,3 +391,11 @@ embedded_instances {
     z: 2.0
   }
 }
+embedded_instances {
+  id: "tutorial_ui"
+  data: "components {\n"
+  "  id: \"tutorial_gui_1\"\n"
+  "  component: \"/main/gui/tutorial_guis/tutorial_gui_1.gui\"\n"
+  "}\n"
+  ""
+}

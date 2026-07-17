@@ -23,6 +23,7 @@ function on_input(self, action_id, action)
 	if action_id == hash("touch") and action.pressed and self.visible then
 		-- Getting the buttons
 		local continue_button = gui.get_node("continue_button")
+		local restart_button = gui.get_node("restart_button")
 		local menu_button = gui.get_node("menu_button")
 
 		-- Checking if continue button was pressed
@@ -33,6 +34,12 @@ function on_input(self, action_id, action)
 
 			-- Sending a message to unpause the ball
 			msg.post("/ball_spawner#ball_spawner", "game_unpaused")
+		end
+
+		-- Checking if restart button was pressed
+		if gui.pick_node(restart_button, action.x, action.y) then
+			-- Telling the collection manager to restart
+			msg.post("main:/collection_manager#loader", "restart_level")
 		end
 
 		-- Checking if exit button was pressed

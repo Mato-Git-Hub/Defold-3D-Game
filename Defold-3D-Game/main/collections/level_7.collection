@@ -470,3 +470,11 @@ embedded_instances {
     y: 0.5
   }
 }
+embedded_instances {
+  id: "tutorial_ui"
+  data: "components {\n"
+  "  id: \"tutorial_gui_2\"\n"
+  "  component: \"/main/gui/tutorial_guis/tutorial_gui_2.gui\"\n"
+  "}\n"
+  ""
+}

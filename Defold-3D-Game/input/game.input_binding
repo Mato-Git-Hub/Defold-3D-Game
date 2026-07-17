@@ -38,6 +38,50 @@ key_trigger {
   input: KEY_ESC
   action: "menu"
 }
+key_trigger {
+  input: KEY_R
+  action: "restart"
+}
+key_trigger {
+  input: KEY_1
+  action: "level_1"
+}
+key_trigger {
+  input: KEY_2
+  action: "level_2"
+}
+key_trigger {
+  input: KEY_3
+  action: "level_3"
+}
+key_trigger {
+  input: KEY_4
+  action: "level_4"
+}
+key_trigger {
+  input: KEY_5
+  action: "level_5"
+}
+key_trigger {
+  input: KEY_6
+  action: "level_6"
+}
+key_trigger {
+  input: KEY_7
+  action: "level_7"
+}
+key_trigger {
+  input: KEY_8
+  action: "level_8"
+}
+key_trigger {
+  input: KEY_9
+  action: "level_9"
+}
+key_trigger {
+  input: KEY_0
+  action: "level_10"
+}
 mouse_trigger {
   input: MOUSE_BUTTON_1
   action: "touch"

@@ -1,0 +1,6 @@
+function init(self)
+	-- Hiding the text after some time
+	timer.delay(10, false, function ()
+		gui.set_enabled(gui.get_node("text"), false)
+	end)
+end
