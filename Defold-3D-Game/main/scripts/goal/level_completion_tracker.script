@@ -9,6 +9,7 @@ function on_message(self, message_id, message, sender)
 		msg.post("/camera#camera_level_completed_animation", "level_completed")
 		msg.post("/camera#camera_controller", "level_completed")
 		msg.post("#goal_particles", "level_completed")
+		msg.post("/in_game_ui#in_game_gui", "level_completed")
 
 		-- Stopping the ball
 		msg.post(go.get("/ball_spawner#ball_spawner", "collisionobject_id"), "disable")

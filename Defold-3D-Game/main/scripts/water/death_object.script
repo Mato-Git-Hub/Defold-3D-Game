@@ -1,7 +1,8 @@
 function on_message(self, message_id, message, sender)
 	-- Checking for collision with the ball
 	if message_id == hash("trigger_response") and message.enter and message.other_id == hash(go.get("/ball_spawner#ball_spawner", "ball_id")) then
-		-- Sending death message to the ball
+		-- Sending death message to the ball and the level complete UI to track deaths
 		msg.post("/ball_spawner#ball_spawner", "ball_died")
+		msg.post("/level_complete_ui#level_complete_gui", "ball_died")
 	end
 end

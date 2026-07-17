@@ -1,3 +1,23 @@
+-- Function to update the level timer
+local function update_timer(self)
+	-- Checking if level was already completed
+	if self.level_completed then return end
+
+	-- Calculating time passed
+	local time_passed = socket.gettime() - self.start_time
+
+	-- Formatting the time
+	local minutes = math.floor(time_passed / 60)
+	local seconds = math.floor(time_passed % 60)
+
+	-- Z-filling
+	local time_string = string.format("%02d:%02d", minutes, seconds)
+
+	-- Setting the time
+	local timer_node = gui.get_node("timer")
+	gui.set_text(timer_node, time_string)
+end
+
 function init(self)
 	-- Acquiring input focus
 	msg.post(".", "acquire_input_focus")
@@ -8,16 +28,21 @@ function init(self)
 	self.full_pos = gui.get_position(self.dash_bar)
 	self.empty_pos = gui.get_position(self.dash_bar)
 	self.empty_pos.y = self.empty_pos.y - self.dash_bar_size.y / 2
+	self.start_time = socket.gettime()
 
 	print("Empty:", self.empty_pos.y, "Full:", self.full_pos.y)
 
 	-- Defining state variables
 	self.paused = false
+	self.level_completed = false
 	self.dash_used = 0
 	self.dash_cooldown = 1
 end
 
 function update(self, dt)
+	-- Updating the timer
+	update_timer(self)
+
 	-- Calculating the dash meter based of dash use time and cooldown
 	local t = 1 - (self.dash_used + self.dash_cooldown - socket.gettime()) / self.dash_cooldown
 	t = vmath.clamp(t, 0, 1)
@@ -31,6 +56,12 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
+	-- Checking for level completion message'
+	if message_id == hash("level_completed") then
+		-- Updating level completion status
+		self.level_completed = true
+	end
+
 	-- Checking for dash used message
 	if message_id == hash("dash_used") then
 		-- Updating dash used time and dash cooldown
@@ -41,7 +72,7 @@ end
 
 function on_input(self, action_id, action)
 	-- Checking if a button is pressed
-	if action_id == hash("touch") and action.pressed and not self.paused then
+	if action_id == hash("touch") and action.pressed and not self.paused and not self.level_completed then
 		-- Getting the buttons
 		local pause_button = gui.get_node("pause_button")
 
@@ -55,7 +86,7 @@ function on_input(self, action_id, action)
 	end
 
 	-- Checking for keyboard input for the pause button
-	if action_id == hash("menu") and action.pressed and not self.paused then
+	if action_id == hash("menu") and action.pressed and not self.paused and not self.level_completed then
 		-- Pausing the game
 		self.paused = false
 		msg.post("/pause_ui#pause_menu_gui", "game_paused")

@@ -3,10 +3,6 @@ fonts {
   name: "outline"
   font: "/assets/fonts/outline.font"
 }
-fonts {
-  name: "default"
-  font: "/builtins/fonts/default.font"
-}
 nodes {
   position {
     x: 50.0
@@ -135,6 +131,26 @@ nodes {
   parent: "bar_base"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 480.0
+    y: 600.0
+  }
+  scale {
+    x: 3.0
+    y: 3.0
+    z: 3.0
+  }
+  size {
+    x: 50.0
+    y: 25.0
+  }
+  type: TYPE_TEXT
+  text: "00:00"
+  font: "outline"
+  id: "timer"
+  inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

@@ -1,3 +1,13 @@
+-- Function to display the deaths
+local function display_deaths(self)
+	-- Foramtting the string
+	local deaths_string = "Deaths: " .. tostring(self.deaths)
+
+	-- Updating the text
+	local deaths_node = gui.get_node("deaths_text")
+	gui.set_text(deaths_node, deaths_string)
+end
+
 function init(self)
 	-- Acquiring input focus
 	msg.post(".", "acquire_input_focus")
@@ -7,14 +17,24 @@ function init(self)
 
 	-- Defining state variables
 	self.visible = false
+	self.deaths = 0
 end
 
 function on_message(self, message_id, message, sender)
 	-- Checking if level was completed
 	if message_id == hash("level_completed") then
+		-- Updating deaths text
+		display_deaths(self)
+
 		-- Showing the ui
 		msg.post(".", "enable")
 		self.visible = true
+	end
+
+	-- Checking if ball died
+	if message_id == hash("ball_died") then
+		-- Incrementing death counter
+		self.deaths = self.deaths + 1
 	end
 end
 

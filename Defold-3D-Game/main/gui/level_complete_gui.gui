@@ -131,5 +131,25 @@ nodes {
   parent: "menu_button_base"
   inherit_alpha: true
 }
+nodes {
+  position {
+    x: 480.0
+    y: 375.0
+  }
+  scale {
+    x: 2.5
+    y: 2.5
+    z: 2.5
+  }
+  size {
+    x: 75.0
+    y: 25.0
+  }
+  type: TYPE_TEXT
+  text: "Deaths: 0"
+  font: "outline"
+  id: "deaths_text"
+  inherit_alpha: true
+}
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
