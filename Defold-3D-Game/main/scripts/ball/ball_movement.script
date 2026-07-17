@@ -73,6 +73,7 @@ function init(self)
 	self.dash_used = 0;
 
 	-- Informing UI about dash being ready
+	if not go_help.exists("/in_game_ui") then return end
 	msg.post("/in_game_ui#in_game_gui", "dash_used", { dash_used = 0, dash_cooldown = 1 })
 end
 
