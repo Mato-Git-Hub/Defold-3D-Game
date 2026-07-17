@@ -89,7 +89,16 @@ function update(self, dt)
 
 	-- Updating the position
 	self.position = tween.move_towards_vector(self.position, target_position, get_camera_speed(self, target_position) * dt)
-	go.set_position(self.position, ".")
+
+	-- Checking if there are structures in the way
+	local raycast_result = physics.raycast(ball_pos, self.position, { hash("ground") })
+	if raycast_result then
+		-- Setting target position so that no structures are in the way
+		go.set_position(raycast_result.position, ".")
+	else
+		-- Setting the position
+		go.set_position(self.position, ".")
+	end
 end
 
 function on_message(self, message_id, message, sender)

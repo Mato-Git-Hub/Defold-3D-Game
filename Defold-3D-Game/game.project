@@ -37,3 +37,9 @@ clear_color_red = 0.160156
 clear_color_green = 0.164063
 clear_color_blue = 0.183594
 
+[collection_proxy]
+max_count = 16
+
+[model]
+max_count = 256
+

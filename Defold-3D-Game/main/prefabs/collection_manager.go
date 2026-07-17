@@ -44,3 +44,27 @@ embedded_components {
   data: "collection: \"/main/collections/level_6.collection\"\n"
   ""
 }
+embedded_components {
+  id: "level_7"
+  type: "collectionproxy"
+  data: "collection: \"/main/collections/level_7.collection\"\n"
+  ""
+}
+embedded_components {
+  id: "level_8"
+  type: "collectionproxy"
+  data: "collection: \"/main/collections/level_8.collection\"\n"
+  ""
+}
+embedded_components {
+  id: "level_9"
+  type: "collectionproxy"
+  data: "collection: \"/main/collections/level_9.collection\"\n"
+  ""
+}
+embedded_components {
+  id: "level_10"
+  type: "collectionproxy"
+  data: "collection: \"/main/collections/level_10.collection\"\n"
+  ""
+}
